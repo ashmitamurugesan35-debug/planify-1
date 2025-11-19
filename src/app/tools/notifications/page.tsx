@@ -18,9 +18,14 @@ export default function NotificationsPage() {
                     <CardTitle>Master Control</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 rounded-md border p-4">
                         <Switch id="master-toggle" defaultChecked />
-                        <Label htmlFor="master-toggle">Enable All Notifications</Label>
+                        <Label htmlFor="master-toggle" className="flex flex-col space-y-1">
+                            <span>Enable All Notifications</span>
+                            <span className="font-normal leading-snug text-muted-foreground">
+                                Turn all notifications on or off with one click.
+                            </span>
+                        </Label>
                     </div>
                 </CardContent>
             </Card>
@@ -30,61 +35,42 @@ export default function NotificationsPage() {
                     <CardTitle>Notification Types</CardTitle>
                     <CardDescription>Toggle reminders for different activities.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                    <NotificationToggle id="class-reminders" label="Class Reminders" defaultChecked />
-                    <NotificationToggle id="assignment-deadlines" label="Assignment Deadline Alerts" defaultChecked />
-                    <NotificationToggle id="exam-alerts" label="Exam Preparation Alerts" defaultChecked />
-                    <NotificationToggle id="project-activity" label="Project/Team Activity Alerts" />
-                    <NotificationToggle id="study-goals" label="Personal Study Goals Alerts" />
-                    <NotificationToggle id="focus-timer" label="Focus Timer Alerts" defaultChecked />
+                <CardContent className="grid gap-6">
+                    <NotificationToggle id="class-reminders" label="Class Reminders" description="Get notified 10 minutes before a class starts." defaultChecked />
+                    <NotificationToggle id="assignment-deadlines" label="Assignment Deadline Alerts" description="Reminders for upcoming assignment due dates." defaultChecked />
+                    <NotificationToggle id="exam-alerts" label="Exam Preparation Alerts" description="Alerts for upcoming exams." defaultChecked />
+                    <NotificationToggle id="project-activity" label="Project/Team Activity Alerts" description="Get notified about updates in your team projects."/>
+                    <NotificationToggle id="study-goals" label="Personal Study Goals Alerts" description="Reminders to keep you on track with your study goals." />
+                    <NotificationToggle id="focus-timer" label="Focus Timer Alerts" description="Notifications for when your focus sessions end." defaultChecked />
+                    <NotificationToggle id="morning-summary" label="Morning Summary" description="Get your daily schedule summary at 7:00 AM." />
                 </CardContent>
             </Card>
 
             <Card>
                 <CardHeader>
-                    <CardTitle>Smart Timing Options</CardTitle>
-                     <CardDescription>Choose when you want to be reminded.</CardDescription>
+                    <CardTitle>Advanced Settings</CardTitle>
+                     <CardDescription>Customize notification behavior.</CardDescription>
                 </CardHeader>
-                <CardContent>
-                    <RadioGroup defaultValue="10min">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="now" id="r1" />
-                                <Label htmlFor="r1">At the moment</Label>
-                            </div>
-                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="10min" id="r2" />
-                                <Label htmlFor="r2">10 min before</Label>
-                            </div>
-                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="30min" id="r3" />
-                                <Label htmlFor="r3">30 min before</Label>
-                            </div>
-                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="1hour" id="r4" />
-                                <Label htmlFor="r4">1 hour before</Label>
-                            </div>
-                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="1day" id="r5" />
-                                <Label htmlFor="r5">1 day before</Label>
-                            </div>
+                <CardContent className="space-y-6">
+                    <div>
+                        <Label className="font-semibold">Quiet Hours (Do Not Disturb)</Label>
+                        <div className="flex items-center space-x-2 mt-2">
+                            <Input type="time" defaultValue="22:00" />
+                            <span>to</span>
+                            <Input type="time" defaultValue="06:00" />
                         </div>
-                    </RadioGroup>
-                    <div className="mt-4 flex gap-2 sm:w-1/2">
-                        <Input type="text" placeholder="Custom reminder..." />
-                        <Button>Set</Button>
                     </div>
-                </CardContent>
-            </Card>
-
-            <Card>
-                <CardHeader>
-                    <CardTitle>Delivery Channels</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                    <NotificationToggle id="push-notifications" label="Push Notifications" defaultChecked />
-                    <NotificationToggle id="email-alerts" label="Email Alerts" />
-                    <NotificationToggle id="in-app-popups" label="In-App Pop-ups" defaultChecked />
+                     <Separator />
+                     <NotificationToggle id="smart-reminders" label="Smart Auto-Reminders" description="Let AI remind you about tasks based on your free time and deadlines."/>
+                    <Separator />
+                    <div>
+                        <Label className="font-semibold">Delivery Channels</Label>
+                        <div className="space-y-3 mt-2">
+                           <NotificationToggle id="push-notifications" label="Push Notifications" defaultChecked />
+                            <NotificationToggle id="email-alerts" label="Email Alerts" />
+                            <NotificationToggle id="in-app-popups" label="In-App Pop-ups" defaultChecked />
+                        </div>
+                    </div>
                 </CardContent>
             </Card>
             
@@ -95,10 +81,13 @@ export default function NotificationsPage() {
     )
 }
 
-function NotificationToggle({ id, label, defaultChecked = false }: { id: string, label: string, defaultChecked?: boolean }) {
+function NotificationToggle({ id, label, description, defaultChecked = false }: { id: string, label: string, description?: string, defaultChecked?: boolean }) {
     return (
-        <div className="flex items-center justify-between">
-            <Label htmlFor={id}>{label}</Label>
+        <div className="flex items-center justify-between rounded-lg border p-4">
+            <Label htmlFor={id} className="flex flex-col space-y-1">
+                <span>{label}</span>
+                {description && <span className="font-normal leading-snug text-muted-foreground">{description}</span>}
+            </Label>
             <Switch id={id} defaultChecked={defaultChecked} />
         </div>
     )

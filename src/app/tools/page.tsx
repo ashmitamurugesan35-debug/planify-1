@@ -1,46 +1,49 @@
 "use client"
 
 import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Clock, Bell, Settings, HelpCircle, FileInput, FileOutput } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Clock, Bell, Settings, HelpCircle, FileInput } from "lucide-react";
 
 const tools = [
   {
     title: "Focus Timer",
-    description: "Start a focus session with presets.",
+    description: "Stay focused with customizable study cycles.",
     icon: Clock,
     href: "/tools/timer",
   },
   {
-    title: "Notifications",
-    description: "Manage your notification settings.",
+    title: "Reminders & Notifications",
+    description: "Control when and how you get notified.",
     icon: Bell,
     href: "/tools/notifications",
   },
   {
     title: "Data Import/Export",
-    description: "Sync your data via CSV/ICS.",
+    description: "Sync your timetable, tasks, and schedules.",
     icon: FileInput,
     href: "/tools/data",
   },
   {
-    title: "Settings",
-    description: "Profile, college info, and theme.",
-    icon: Settings,
-    href: "/tools/settings",
-  },
-  {
     title: "Help Center",
-    description: "Find FAQs and get support.",
+    description: "Get answers, tips, and support.",
     icon: HelpCircle,
     href: "/tools/help",
+  },
+  {
+    title: "Settings",
+    description: "Customize your preferences.",
+    icon: Settings,
+    href: "/tools/settings",
   },
 ];
 
 export default function ToolsPage() {
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <h2 className="text-3xl font-bold tracking-tight">Tools</h2>
+      <div className="space-y-1">
+        <h2 className="text-3xl font-bold tracking-tight">Tools</h2>
+        <p className="text-muted-foreground">Utilities & Smart Controls</p>
+      </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => (
           <Link href={tool.href} key={tool.title}>
@@ -49,7 +52,7 @@ export default function ToolsPage() {
                 <tool.icon className="h-8 w-8 text-primary" />
                 <div>
                   <CardTitle>{tool.title}</CardTitle>
-                  <CardDescription>{tool.description}</CardDescription>
+                  <CardDescription className="mt-1">{tool.description}</CardDescription>
                 </div>
               </CardHeader>
             </Card>
