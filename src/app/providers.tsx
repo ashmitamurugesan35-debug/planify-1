@@ -2,14 +2,23 @@
 
 import { QuestionnaireProvider } from '@/context/QuestionnaireProvider';
 import type { ReactNode } from 'react';
-import { FirebaseClientProvider } from '@/firebase/client-provider';
+import { FirebaseProvider } from '@/firebase/provider';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { firebaseConfig } from '@/firebase/config';
+
+// Initialize firebase outside of components
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <FirebaseClientProvider>
+    <FirebaseProvider app={app} auth={auth} firestore={firestore}>
       <QuestionnaireProvider>
         {children}
       </QuestionnaireProvider>
-    </FirebaseClientProvider>
+    </FirebaseProvider>
   );
 }

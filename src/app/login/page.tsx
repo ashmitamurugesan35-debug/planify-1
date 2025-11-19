@@ -6,7 +6,8 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { useAuth, useUser } from '@/firebase';
+import { useAuth } from '@/firebase/provider';
+import { useUser } from '@/firebase/auth/use-user';
 import { Button } from '@/components/ui/button';
 import { PlanifyLogo } from '@/components/logo';
 import { Chrome, Github } from 'lucide-react';
@@ -45,14 +46,14 @@ export default function LoginPage() {
         <div className="w-full space-y-4 mt-4">
           <Button
             className="w-full"
-            onClick={() => handleSignIn(new GoogleAuthProvider())}
+            onClick={() => auth && handleSignIn(new GoogleAuthProvider())}
           >
             <Chrome className="mr-2 h-4 w-4" /> Sign in with Google
           </Button>
           <Button
             variant="secondary"
             className="w-full"
-            onClick={() => handleSignIn(new GithubAuthProvider())}
+            onClick={() => auth && handleSignIn(new GithubAuthProvider())}
           >
             <Github className="mr-2 h-4 w-4" /> Sign in with GitHub
           </Button>
