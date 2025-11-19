@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Plus, Search, Filter, Check, Clock, Edit, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { useState, useEffect } from "react";
 
 const tasks = [
     {
@@ -85,6 +86,12 @@ export default function TasksPage() {
 }
 
 function TaskList({ tasks }: { tasks: typeof import("./page").tasks }) {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     if (tasks.length === 0) {
         return (
             <div className="text-center py-16">
@@ -109,7 +116,11 @@ function TaskList({ tasks }: { tasks: typeof import("./page").tasks }) {
                     <CardContent className="space-y-3">
                          <div className="flex items-center text-sm text-muted-foreground">
                             <Clock className="mr-2 h-4 w-4" />
-                            <span>Due {new Date(task.dueDate).toLocaleDateString()} &bull; {new Date(task.dueDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                            {isClient ? (
+                                <span>Due {new Date(task.dueDate).toLocaleDateString()} &bull; {new Date(task.dueDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                            ) : (
+                                <span>Loading...</span>
+                            )}
                         </div>
                         {task.progress > 0 && <Progress value={task.progress} />}
                         <div className="flex items-center justify-end space-x-2 pt-2 border-t mt-2">
