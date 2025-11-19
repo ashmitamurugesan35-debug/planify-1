@@ -1,18 +1,19 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useQuestionnaire } from '@/context/QuestionnaireProvider';
 import { optimizeSchedule } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowLeft } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import Link from 'next/link';
 
 export function ScheduleDisplay() {
   const router = useRouter();
-  const { reset, category, subCategory } = useQuestionnaire();
+  const { reset, category, subCategory, answers } = useQuestionnaire();
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +32,9 @@ export function ScheduleDisplay() {
       }
     }
   }, []);
+  
+  const lastQuestionIndex = Object.keys(answers).length - 1;
+  const backLink = `/q/${category}/${subCategory}/${lastQuestionIndex >= 0 ? lastQuestionIndex : 0}`;
 
   const handleStartOver = () => {
     reset();
@@ -95,6 +99,10 @@ export function ScheduleDisplay() {
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8">
+        <Link href={backLink} className="absolute top-8 left-8 flex items-center gap-2 text-primary">
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back</span>
+        </Link>
         <Card className="w-full max-w-4xl shadow-lg">
           <CardHeader>
             <CardTitle className="text-3xl font-headline text-center">Your Personalized Schedule</CardTitle>

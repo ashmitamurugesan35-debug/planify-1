@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, User } from "lucide-react";
-import { PlanifyLogo } from "@/components/logo";
+import { GraduationCap, User, ArrowLeft } from "lucide-react";
 
 export default function CategoryPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 text-primary">
-        <PlanifyLogo className="h-6 w-6" />
-        <span className="font-bold font-headline">Planify</span>
+        <ArrowLeft className="h-4 w-4" />
+        <span>Back</span>
       </Link>
       <div className="flex flex-col items-center gap-4 text-center w-full max-w-md">
         <h1 className="text-3xl font-bold font-headline">Choose a Category</h1>

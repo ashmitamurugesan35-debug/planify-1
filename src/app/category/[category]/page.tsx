@@ -6,7 +6,6 @@ import { useRouter, useParams } from "next/navigation";
 import { useQuestionnaire } from "@/context/QuestionnaireProvider";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { PlanifyLogo } from "@/components/logo";
 import { ArrowLeft } from "lucide-react";
 
 const subCategories = {
@@ -47,7 +46,7 @@ export default function SubCategoryPage() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <Link href="/category" className="absolute top-8 left-8 flex items-center gap-2 text-primary">
          <ArrowLeft className="h-4 w-4" />
-        <span>Back to Categories</span>
+        <span>Back</span>
       </Link>
       <Card className="w-full max-w-md p-8 shadow-lg">
         <div className="flex flex-col items-center gap-4 text-center">

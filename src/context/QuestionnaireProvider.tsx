@@ -37,20 +37,24 @@ export const QuestionnaireProvider = ({ children }: { children: ReactNode }) => 
   const getFormattedAnswers = () => {
     if (!category) return null;
 
+    const allAnswers = { ...answers };
+    
     if (category === 'personal') {
-      return {
-        category: 'Personal',
-        ...answers,
-      };
+        const { ...rest } = allAnswers;
+        return {
+            category: 'Personal',
+            ...rest,
+        };
     }
 
     if (category === 'academics' && subCategory) {
-      const subCategoryCapitalized = subCategory.charAt(0).toUpperCase() + subCategory.slice(1);
-      return {
-        category: 'Academics',
-        subCategory: subCategoryCapitalized,
-        ...answers,
-      };
+        const subCategoryCapitalized = subCategory.charAt(0).toUpperCase() + subCategory.slice(1);
+        const { ...rest } = allAnswers;
+        return {
+            category: 'Academics',
+            subCategory: subCategoryCapitalized,
+            ...rest,
+        };
     }
     return null;
   };
