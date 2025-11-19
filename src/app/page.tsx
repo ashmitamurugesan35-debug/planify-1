@@ -5,27 +5,26 @@ import { Button } from '@/components/ui/button';
 import { PlanifyLogo } from '@/components/logo';
 import { useUser } from '@/firebase/auth/use-user';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { user, status, error } = useUser();
   const router = useRouter();
 
-  if (status === 'loading') {
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.replace('/dashboard');
+    } else if (status === 'unauthenticated') {
+      router.replace('/login');
+    }
+  }, [status, router]);
+
+  if (status === 'loading' || status === 'authenticated' || status === 'unauthenticated') {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-8">
         <PlanifyLogo className="h-24 w-24 text-primary animate-pulse" />
       </main>
     );
-  }
-
-  if (user) {
-    router.replace('/dashboard');
-    return null;
-  }
-  
-  if (status === 'unauthenticated') {
-    router.replace('/login');
-    return null;
   }
 
   return (
