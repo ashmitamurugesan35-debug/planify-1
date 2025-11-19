@@ -1,0 +1,61 @@
+"use client"
+
+import Link from "next/link";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Clock, Bell, Settings, HelpCircle, FileInput, FileOutput } from "lucide-react";
+
+const tools = [
+  {
+    title: "Focus Timer",
+    description: "Start a focus session with presets.",
+    icon: Clock,
+    href: "/tools/timer",
+  },
+  {
+    title: "Notifications",
+    description: "Manage your notification settings.",
+    icon: Bell,
+    href: "/tools/notifications",
+  },
+  {
+    title: "Data Import/Export",
+    description: "Sync your data via CSV/ICS.",
+    icon: FileInput,
+    href: "/tools/data",
+  },
+  {
+    title: "Settings",
+    description: "Profile, college info, and theme.",
+    icon: Settings,
+    href: "/tools/settings",
+  },
+  {
+    title: "Help Center",
+    description: "Find FAQs and get support.",
+    icon: HelpCircle,
+    href: "/tools/help",
+  },
+];
+
+export default function ToolsPage() {
+  return (
+    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <h2 className="text-3xl font-bold tracking-tight">Tools</h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {tools.map((tool) => (
+          <Link href={tool.href} key={tool.title}>
+            <Card className="hover:bg-accent hover:border-primary/50 transition-all duration-300 shadow-md hover:shadow-xl h-full">
+              <CardHeader className="flex flex-row items-center gap-4 space-y-0">
+                <tool.icon className="h-8 w-8 text-primary" />
+                <div>
+                  <CardTitle>{tool.title}</CardTitle>
+                  <CardDescription>{tool.description}</CardDescription>
+                </div>
+              </CardHeader>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}

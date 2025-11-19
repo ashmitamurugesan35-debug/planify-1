@@ -12,7 +12,8 @@ import {
   Bell,
   HelpCircle,
   Clock,
-  LogOut
+  LogOut,
+  FileInput
 } from "lucide-react"
 
 import {
@@ -23,9 +24,13 @@ import {
   SidebarMenuButton,
   SidebarFooter,
   SidebarSeparator,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton
 } from "@/components/ui/sidebar"
 import { PlanifyLogo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible"
 
 export function AppSidebar() {
   const pathname = usePathname()
@@ -35,10 +40,15 @@ export function AppSidebar() {
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/calendar", label: "Calendar", icon: Calendar },
     { href: "/tasks", label: "Tasks & Activities", icon: ClipboardList },
-    { href: "/tools", label: "Tools", icon: Wrench,
+    {
+      id: "tools",
+      label: "Tools",
+      icon: Wrench,
+      href: "/tools",
       subMenu: [
         { href: "/tools/timer", label: "Focus Timer", icon: Clock },
         { href: "/tools/notifications", label: "Notifications", icon: Bell },
+        { href: "/tools/data", label: "Data Import/Export", icon: FileInput },
         { href: "/tools/settings", label: "Settings", icon: Settings },
         { href: "/tools/help", label: "Help Center", icon: HelpCircle },
       ]
@@ -56,17 +66,50 @@ export function AppSidebar() {
       <SidebarContent className="p-2">
         <SidebarMenu>
           {menuItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
-              <SidebarMenuButton
-                asChild
-                isActive={pathname === item.href}
-              >
-                <Link href={item.href}>
-                  <item.icon />
-                  <span>{item.label}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            item.subMenu ? (
+              <Collapsible key={item.id} className="w-full" defaultOpen={pathname.startsWith(item.href!)}>
+                <CollapsibleTrigger asChild>
+                   <SidebarMenuItem>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname.startsWith(item.href || '/tools')}
+                      className="w-full justify-start"
+                    >
+                      <Link href={item.href || '#'}>
+                        <item.icon />
+                        <span>{item.label}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {item.subMenu.map(subItem => (
+                       <SidebarMenuSubItem key={subItem.href}>
+                         <SidebarMenuSubButton asChild isActive={pathname === subItem.href}>
+                            <Link href={subItem.href}>
+                                <subItem.icon />
+                                <span>{subItem.label}</span>
+                            </Link>
+                         </SidebarMenuSubButton>
+                       </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </Collapsible>
+            ) : (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === item.href}
+                >
+                  <Link href={item.href!}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            )
           ))}
         </SidebarMenu>
       </SidebarContent>
