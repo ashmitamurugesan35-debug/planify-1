@@ -38,7 +38,7 @@ export default function NotificationsPage() {
                 <CardContent className="grid gap-6">
                     <NotificationToggle id="class-reminders" label="Class Reminders" description="Get notified 10 minutes before a class starts." defaultChecked />
                     <NotificationToggle id="assignment-deadlines" label="Assignment Deadline Alerts" description="Reminders for upcoming assignment due dates." defaultChecked />
-                    <NotificationToggle id="exam-alerts" label="Exam Preparation Alerts" description="Alerts for upcoming exams." defaultChecked />
+                    <NotificationToggle id="exam-alerts" label="Exam Reminders" description="Alerts for upcoming exams." defaultChecked />
                     <NotificationToggle id="project-activity" label="Project/Team Activity Alerts" description="Get notified about updates in your team projects."/>
                     <NotificationToggle id="study-goals" label="Personal Study Goals Alerts" description="Reminders to keep you on track with your study goals." />
                     <NotificationToggle id="focus-timer" label="Focus Timer Alerts" description="Notifications for when your focus sessions end." defaultChecked />
