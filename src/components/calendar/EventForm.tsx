@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
 
 import { useFirestore, useUser } from '@/firebase';
 import { addDoc, collection, doc, serverTimestamp, setDoc, deleteDoc } from 'firebase/firestore';
@@ -38,10 +38,9 @@ import type { CalendarEvent } from '@/lib/types';
 import { errorEmitter } from '@/firebase/error-emitter';
 import { FirestorePermissionError } from '@/firebase/errors';
 
-
 const eventSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  type: z.enum(['Class', 'Assignment', 'Exam', 'Task', 'Custom']),
+  type: z.enum(['Class', 'Assignment', 'Exam', 'Task', 'Personal', 'Study Time', 'Custom']),
   description: z.string().optional(),
   date: z.date({ required_error: 'Date is required' }),
   startTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format (HH:MM)'),
@@ -60,9 +59,10 @@ type EventFormValues = z.infer<typeof eventSchema>;
 interface EventFormProps {
   event?: CalendarEvent | null;
   onSave: () => void;
+  selectedDate?: Date;
 }
 
-export function EventForm({ event, onSave }: EventFormProps) {
+export function EventForm({ event, onSave, selectedDate }: EventFormProps) {
   const { user } = useUser();
   const firestore = useFirestore();
   const { toast } = useToast();
@@ -75,7 +75,7 @@ export function EventForm({ event, onSave }: EventFormProps) {
       title: event?.title || '',
       type: event?.type || 'Task',
       description: event?.description || '',
-      date: event ? new Date(event.date) : new Date(),
+      date: event ? new Date(event.date) : selectedDate || new Date(),
       startTime: event?.startTime || '',
       endTime: event?.endTime || '',
       subject: event?.subject || '',
@@ -122,7 +122,7 @@ export function EventForm({ event, onSave }: EventFormProps) {
             updatedAt: serverTimestamp(),
         }
         const collectionRef = collection(firestore, 'calendarEvents');
-        const newDocRef = await addDoc(collectionRef, {});
+        const newDocRef = doc(collectionRef); // Create a doc with a generated ID first
         
         const finalPayload = { ...payload, eventId: newDocRef.id };
 
@@ -204,7 +204,7 @@ export function EventForm({ event, onSave }: EventFormProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {['Class', 'Assignment', 'Exam', 'Task', 'Custom'].map((type) => (
+                  {['Class', 'Assignment', 'Exam', 'Task', 'Personal', 'Study Time', 'Custom'].map((type) => (
                     <SelectItem key={type} value={type}>{type}</SelectItem>
                   ))}
                 </SelectContent>

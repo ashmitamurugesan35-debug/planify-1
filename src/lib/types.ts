@@ -3,7 +3,7 @@ export type CalendarEvent = {
   userId: string,
 
   title: string,
-  type: "Class" | "Assignment" | "Exam" | "Task" | "Custom",
+  type: "Class" | "Assignment" | "Exam" | "Task" | "Personal" | "Study Time" | "Custom",
   description?: string,
 
   date: string, // "YYYY-MM-DD"

@@ -52,7 +52,9 @@ export function useCollection<T>(
       (snapshot: QuerySnapshot<DocumentData>) => {
         const result: T[] = [];
         snapshot.forEach((doc) => {
-          result.push({ eventId: doc.id, ...doc.data() } as T);
+          // Use doc.id for eventId if eventId field doesn't exist
+          const docData = doc.data();
+          result.push({ ...docData, eventId: docData.eventId || doc.id } as T);
         });
         setData(result);
         setLoading(false);
