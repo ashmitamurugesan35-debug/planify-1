@@ -30,13 +30,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="h-screen w-full flex items-center justify-center relative bg-background">
+    <div className="h-screen w-full flex items-center justify-center relative bg-background overflow-hidden">
       <Image
         src={PlaceHolderImages[1].imageUrl}
         alt={PlaceHolderImages[1].description}
         data-ai-hint={PlaceHolderImages[1].imageHint}
         fill
-        className="object-cover z-0"
+        className="object-cover z-0 animate-bg-pan"
         priority
       />
       <div className="absolute inset-0 bg-black/50 z-10"></div>
