@@ -35,6 +35,12 @@
       "description": "A soft, minimalistic, aesthetic study-desk background with a blurred depth-of-field effect. Include subtle elements like a pair of glasses, a warm latte art coffee cup, faint notebooks, and gentle shadows. Use cool grey and soft beige tones with a smooth gradient. The objects should be lightly out-of-focus to avoid distracting the UI content. The overall mood should feel calm, modern, and professional — perfect for a productivity app welcome screen.",
       "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZGVzayUyMGNvZmZlZXxlbnwwfHx8fDE3MjQ2OTkyODV8MA&ixlib=rb-4.0.3&q=80&w=1920",
       "imageHint": "minimal desk coffee"
+    },
+    {
+      "id": "warm-study-desk",
+      "description": "A seamless, full-app background illustration with a warm, cozy, aesthetic study theme. Shows an open book, a warm coffee cup, and minimal desk elements. Uses a clean, flat-illustration style with warm beige, cream, and light brown tones.",
+      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aaa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzdHVkeSUyMGRlc2t8ZW58MHx8fHwxNzI1NDE5OTgzfDA&ixlib=rb-4.0.3&q=80&w=1920",
+      "imageHint": "study desk"
     }
   ]
 }
