@@ -13,7 +13,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { createSchedule } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowLeft } from 'lucide-react';
 import type { Question } from '@/lib/questions';
 
 type QuestionnaireClientPageProps = {
@@ -92,7 +92,16 @@ export function QuestionnaireClientPage({
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4 animate-fade-in">
+    <div className="flex min-h-screen flex-col items-center justify-center p-4 animate-fade-in relative">
+        <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => router.back()}
+            disabled={isLoading}
+            className="absolute top-8 left-8"
+        >
+            <ArrowLeft className="h-5 w-5" />
+        </Button>
       <Card className="w-full max-w-xl shadow-2xl">
         <CardHeader>
           <Progress value={progress} className="w-full mb-4" />
@@ -121,16 +130,8 @@ export function QuestionnaireClientPage({
                   </FormItem>
                 )}
               />
-              <div className="flex justify-between items-center">
-                 <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => router.back()}
-                  disabled={questionIndex === 0 || isLoading}
-                >
-                  Back
-                </Button>
-                <span className="text-sm text-muted-foreground">
+              <div className="flex justify-end items-center">
+                <span className="text-sm text-muted-foreground mr-auto">
                   {questionIndex + 1} / {totalQuestions}
                 </span>
                 <Button type="submit" disabled={isLoading}>
