@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button';
 import { PlanifyLogo } from '@/components/logo';
 import { Chrome, Github } from 'lucide-react';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function LoginPage() {
   const auth = useAuth();
@@ -34,13 +36,22 @@ export default function LoginPage() {
   },[status, router])
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center bg-background">
-      <div className="flex flex-col items-center gap-6 text-center p-8 max-w-sm w-full">
+    <div className="h-screen w-full flex items-center justify-center relative bg-background">
+       <Image
+        src={PlaceHolderImages[1].imageUrl}
+        alt={PlaceHolderImages[1].description}
+        data-ai-hint={PlaceHolderImages[1].imageHint}
+        fill
+        className="object-cover z-0"
+        priority
+      />
+      <div className="absolute inset-0 bg-black/50 z-10"></div>
+      <div className="relative z-20 flex flex-col items-center gap-6 text-center p-8 max-w-sm w-full bg-background/80 backdrop-blur-sm rounded-xl shadow-2xl">
         <PlanifyLogo className="h-20 w-20 text-primary" />
         <div>
-          <h1 className="text-4xl font-bold font-headline text-primary">Welcome to Planify</h1>
+          <h1 className="text-4xl font-bold font-headline text-primary">Welcome Back</h1>
           <p className="mt-2 text-md text-muted-foreground">
-            Sign in to manage your schedule.
+            Sign in to continue your journey.
           </p>
         </div>
         <div className="w-full space-y-4 mt-4">

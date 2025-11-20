@@ -6,6 +6,8 @@ import { PlanifyLogo } from '@/components/logo';
 import { useUser } from '@/firebase/auth/use-user';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
   const { status } = useUser();
@@ -15,32 +17,33 @@ export default function Home() {
     if (status === 'authenticated') {
       router.replace('/dashboard');
     } else if (status === 'unauthenticated') {
-      // Stay on the welcome page for unauthenticated users
+      router.replace('/login');
     }
   }, [status, router]);
 
-  if (status === 'loading') {
-    return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-8">
-        <PlanifyLogo className="h-24 w-24 text-primary animate-pulse" />
-      </main>
-    );
-  }
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="flex flex-col items-center gap-6 text-center">
-        <PlanifyLogo className="h-24 w-24 text-primary" />
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
+       <Image
+        src={PlaceHolderImages[0].imageUrl}
+        alt={PlaceHolderImages[0].description}
+        data-ai-hint={PlaceHolderImages[0].imageHint}
+        fill
+        className="object-cover z-0"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-10"></div>
+      <div className="flex flex-col items-center gap-6 text-center z-20 relative">
+        <PlanifyLogo className="h-24 w-24 text-primary drop-shadow-lg" />
         <div>
-          <h1 className="text-5xl font-bold font-headline text-primary">
+          <h1 className="text-5xl font-bold font-headline text-foreground">
             Planify
           </h1>
           <p className="mt-2 text-lg text-muted-foreground">
             Smarter Schedule, Smoother Days.
           </p>
         </div>
-        <Button asChild size="lg" className="mt-8">
-          <Link href="/category">Start</Link>
+        <Button asChild size="lg" className="mt-8 shadow-lg">
+          <Link href="/category">Get Started</Link>
         </Button>
       </div>
     </main>
