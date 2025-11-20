@@ -21,6 +21,17 @@ export default function Home() {
     }
   }, [status, router]);
 
+  // Show a loading state while checking auth
+  if (status === 'loading') {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
+        <PlanifyLogo className="h-24 w-24 text-primary animate-pulse" />
+      </main>
+    );
+  }
+
+  // This content is primarily for users who land here before being redirected.
+  // Or for scenarios where JavaScript is disabled.
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
        <Image
