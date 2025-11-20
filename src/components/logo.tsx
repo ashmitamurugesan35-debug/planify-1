@@ -16,56 +16,20 @@ export function PlanifyLogo({ className }: { className?: string }) {
           fillOpacity="0.1"
         />
         <path
-          d="M12 20H16"
+          d="M20 12V20H28"
           stroke="hsl(var(--primary))"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M24 20H28"
+          d="M12.9289 12.9289C11.0536 14.8043 10 17.3478 10 20C10 22.6522 11.0536 25.1957 12.9289 27.0711C14.0374 28.1796 15.3484 29.0732 16.7925 29.702"
           stroke="hsl(var(--primary))"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeLinejoin="round"
         />
-        <path
-          d="M20 12V16"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M20 24V28"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M15.5 24.5L12 28"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M28 12L24.5 15.5"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 12L18.5 18.5"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M21.5 21.5L28 28"
+         <path 
+          d="M16.5 29.5C16.5 29.5 18 26 21 24C24 22 27.5 23 27.5 23"
           stroke="hsl(var(--primary))"
           strokeWidth="2"
           strokeLinecap="round"
