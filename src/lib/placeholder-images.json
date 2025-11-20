@@ -25,22 +25,16 @@
       "imageHint": "university library"
     },
     {
-      "id": "cozy-library-background",
-      "description": "A warm, cozy, aesthetic background illustration featuring a stack of vintage books, scattered papers, soft lighting, and floating autumn leaves. Use a brown and beige color palette with gentle gradients. Add subtle hand-drawn textures, warm shadows, and a calm scholarly vibe. Include small fun elements like a steaming coffee cup, glasses on the books, and tiny sparkles or falling feathers to add a magical, playful feel. The background should be soft, minimal at the top, and visually rich near the bottom so app icons can be placed clearly.",
-      "imageUrl": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJ0b29uJTIwYm9va3MlMjBjb2ZmZWV8ZW58MHx8fHwxNzI0NjEwNzYxfDA&ixlib=rb-4.0.3&q=80&w=1920",
-      "imageHint": "library books"
+      "id": "cozy-study-illustration",
+      "description": "A soft, cozy, aesthetic background illustration for a productivity and timetable app. Style: warm pastel tones, minimalistic, clean, flat-illustration aesthetic. Include elements like a laptop, an open planner, calendar pages, study notes, pencils, glasses, a cup of coffee with steam, soft leaves around the edges, and light doodles. Composition should be top-down (desk view), with enough empty space in the center for UI content. Add gentle shadows, subtle textures, and warm lighting. Make it visually pleasing, calm, and motivating for students. No harsh colors. Aspect ratio: mobile portrait (1080x1920).",
+      "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYWNhZGVtaWF8ZW58MHx8fHwxNzIxODMzODc4fDA&ixlib=rb-4.0.3&q=80&w=1920",
+      "imageHint": "study desk"
     },
     {
       "id": "blurred-desk-background",
       "description": "A soft, minimalistic, aesthetic study-desk background with a blurred depth-of-field effect. Include subtle elements like a pair of glasses, a warm latte art coffee cup, faint notebooks, and gentle shadows. Use cool grey and soft beige tones with a smooth gradient. The objects should be lightly out-of-focus to avoid distracting the UI content. The overall mood should feel calm, modern, and professional — perfect for a productivity app welcome screen.",
       "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZGVzayUyMGNvZmZlZXxlbnwwfHx8fDE3MjQ2OTkyODV8MA&ixlib=rb-4.0.3&q=80&w=1920",
       "imageHint": "minimal desk coffee"
-    },
-    {
-      "id": "cozy-study-desk-illustration",
-      "description": "A soft, cozy, aesthetic background illustration for a productivity and timetable app. Style: warm pastel tones, minimalistic, clean, flat-illustration aesthetic. Include elements like a laptop, an open planner, calendar pages, study notes, pencils, glasses, a cup of coffee with steam, soft leaves around the edges, and light doodles. Composition should be top-down (desk view), with enough empty space in the center for UI content. Add gentle shadows, subtle textures, and warm lighting. Make it visually pleasing, calm, and motivating for students. No harsh colors. Aspect ratio: mobile portrait (1080x1920).",
-      "imageUrl": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJ0b29uJTIwYm9va3MlMjBjb2ZmZWV8ZW58MHx8fHwxNzI0NjEwNzYxfDA&ixlib=rb-4.0.3&q=80&w=1920",
-      "imageHint": "library books"
     }
   ]
 }
