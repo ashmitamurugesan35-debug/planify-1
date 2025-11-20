@@ -11,14 +11,14 @@ export function PlanifyLogo({ className }: { className?: string }) {
     >
       <defs>
         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: "hsl(180, 100%, 35%)", stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: "hsl(210, 100%, 25%)", stopOpacity: 1 }} />
+          <stop offset="0%" stopColor="hsl(180, 100%, 35%)" />
+          <stop offset="100%" stopColor="hsl(210, 100%, 25%)" />
         </linearGradient>
         <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: "hsl(45, 100%, 50%)", stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: "hsl(35, 100%, 60%)", stopOpacity: 1 }} />
+          <stop offset="0%" stopColor="hsl(45, 100%, 50%)" />
+          <stop offset="100%" stopColor="hsl(35, 100%, 60%)" />
         </linearGradient>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="3" result="coloredBlur" />
           <feMerge>
             <feMergeNode in="coloredBlur" />
@@ -28,34 +28,22 @@ export function PlanifyLogo({ className }: { className?: string }) {
       </defs>
 
       {/* <!-- Icon Group --> */}
-      <g transform="translate(20, 30)">
-        {/* <!-- Open Book --> */}
-        <path d="M50 10 C 20 10, 10 30, 10 60 C 10 90, 20 110, 50 110 L 50 10 Z" fill="url(#grad1)" />
-        <path d="M50 10 C 80 10, 90 30, 90 60 C 90 90, 80 110, 50 110 L 50 10 Z" fill="url(#grad1)" />
-        <path d="M50 110 C 30 110, 20 95, 20 80" stroke="hsl(190, 80%, 70%)" strokeWidth="1.5" fill="none" />
-        <path d="M50 110 C 70 110, 80 95, 80 80" stroke="hsl(190, 80%, 70%)" strokeWidth="1.5" fill="none" />
-        <path d="M25 25h50" stroke="hsl(190, 80%, 60%)" strokeWidth="1" strokeLinecap="round"/>
-        <path d="M25 35h50" stroke="hsl(190, 80%, 60%)" strokeWidth="1" strokeLinecap="round"/>
+      <g transform="translate(10, 30)">
+        {/* <!-- Stylized P / Book --> */}
+        <path 
+          d="M 30 10 C 20 10, 10 20, 10 40 L 10 100 C 10 105, 15 110, 20 110 L 50 110 C 85 110, 95 80, 95 60 C 95 30, 80 10, 50 10 L 30 10 Z"
+          fill="url(#grad1)"
+        />
+        <path d="M 50 10 L 50 110" stroke="hsl(190, 80%, 70%)" strokeWidth="2" />
         
-        {/* <!-- Brain Icon --> */}
-        <g transform="translate(50, 40) scale(0.6)">
-            <path d="M18.33 26H5.67A2.67 2.67 0 0 1 3 23.33V5.67A2.67 2.67 0 0 1 5.67 3h12.66A2.67 2.67 0 0 1 21 5.67v17.66A2.67 2.67 0 0 1 18.33 26Z" fill="none"/>
-            <path d="M12 3a9 9 0 0 0-9 9c0 4.3 2.5 8 6 9.3V24h6v-2.7c3.5-1.3 6-5 6-9.3a9 9 0 0 0-9-9Z" fill="url(#grad2)" filter="url(#glow)"/>
-        </g>
+        {/* <!-- Abstract Flow Lines --> */}
+        <path d="M 55 30 Q 75 40, 95 35" stroke="hsl(190, 80%, 60%)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        <path d="M 55 50 Q 85 50, 105 60" stroke="hsl(190, 80%, 60%)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        <path d="M 55 70 Q 70 85, 90 90" stroke="hsl(190, 80%, 60%)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
 
-        {/* <!-- Graduation Cap --> */}
-        <g transform="translate(30, -15) rotate(-15)">
-          <path d="M5 15 L 25 10 L 45 15 L 25 20 Z" fill="hsl(210, 50%, 25%)" />
-          <rect x="18" y="15" width="14" height="6" fill="hsl(210, 50%, 35%)" />
-          <line x1="45" y1="15" x2="48" y2="10" stroke="url(#grad2)" strokeWidth="1.5" />
-        </g>
-
-        {/* <!-- Pencil --> */}
-        <g transform="translate(75, 75) rotate(45)">
-          <path d="M0 0 L5 -2 L20 13 L15 15 Z" fill="hsl(210, 50%, 80%)"/>
-          <path d="M-2 -2 L0 0 L5 -2 L3 -4 Z" fill="hsl(35, 100%, 70%)"/>
-          <rect x="5" y="-2" width="15" height="4" rx="1" fill="hsl(210, 50%, 60%)"/>
-        </g>
+        {/* <!-- Glowing Node (Brain/Idea) --> */}
+        <circle cx="105" cy="35" r="5" fill="url(#grad2)" filter="url(#glow)" />
+        <circle cx="115" cy="60" r="3" fill="url(#grad2)" filter="url(#glow)" />
       </g>
       
       {/* <!-- Text --> */}
@@ -82,7 +70,6 @@ export function PlanifyLogo({ className }: { className?: string }) {
         >
             Smart Timetable
         </text>
-         <rect x="200" y="5" width="3" height="70" rx="1.5" fill="url(#grad2)"/>
       </g>
       
     </svg>
