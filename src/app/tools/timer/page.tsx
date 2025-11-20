@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Play, Pause, RotateCw, Volume2, VolumeX, ArrowLeft } from "lucide-react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
@@ -45,12 +45,12 @@ export default function FocusTimerPage() {
     setIsActive(!isActive);
   };
 
-  const resetTimer = (presetKey: string) => {
+  const resetTimer = useCallback((presetKey: string) => {
     const preset = presets[presetKey as keyof typeof presets];
     setActivePreset(presetKey);
     setTimer(preset.time);
     setIsActive(false);
-  };
+  }, []);
   
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -59,6 +59,10 @@ export default function FocusTimerPage() {
   };
 
   const progressPercentage = (1 - (timer / totalTime)) * 100;
+
+  useEffect(() => {
+    resetTimer('pomodoro');
+  }, [resetTimer]);
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6 flex flex-col items-center">

@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { EventForm } from "@/components/calendar/EventForm";
 
 const tasks = [
     {
@@ -38,6 +40,7 @@ const tasks = [
 
 
 export default function TasksPage() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">
@@ -85,14 +88,24 @@ export default function TasksPage() {
         </TabsContent>
       </Tabs>
       
-       <Button className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg">
-           <Plus className="h-8 w-8" />
-       </Button>
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+        <SheetTrigger asChild>
+          <Button className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg">
+              <Plus className="h-8 w-8" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent className="sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle>Add New Task</SheetTitle>
+          </SheetHeader>
+          <EventForm onSave={() => setIsSheetOpen(false)} />
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
 
-function TaskList({ tasks }: { tasks: typeof import("./page").tasks }) {
+function TaskList({ tasks }: { tasks: any[] }) {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {

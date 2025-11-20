@@ -7,6 +7,8 @@ import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { EventForm } from "@/components/calendar/EventForm"
 
 const upcomingExams = [
     { subject: "Quantum Physics", date: "Dec 12, 2024", time: "10:00 AM", room: "A-101", color: "bg-blue-500" },
@@ -138,10 +140,23 @@ export default function ExamsPage() {
                 </div>
             </div>
 
-            <Button className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg">
-                <Plus className="h-8 w-8" />
-                <span className="sr-only">Add Exam</span>
-            </Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg">
+                    <Plus className="h-8 w-8" />
+                    <span className="sr-only">Add Exam</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent>
+                  <SheetHeader>
+                      <SheetTitle>Add a New Exam</SheetTitle>
+                      <SheetDescription>
+                        Fill in the details for your upcoming exam.
+                      </SheetDescription>
+                  </SheetHeader>
+                  <EventForm onSave={() => {}} />
+              </SheetContent>
+            </Sheet>
         </div>
     )
 }

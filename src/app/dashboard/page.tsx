@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Bell, Clock, Calendar, CheckSquare, PlusCircle } from "lucide-react"
+import Link from "next/link"
 
 export default function DashboardPage() {
   return (
@@ -8,8 +9,10 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex items-center space-x-2">
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" /> Add New Event
+          <Button asChild>
+            <Link href="/calendar">
+              <PlusCircle className="mr-2 h-4 w-4" /> Add New Event
+            </Link>
           </Button>
         </div>
       </div>
@@ -71,12 +74,19 @@ export default function DashboardPage() {
         <Card className="col-span-4">
           <CardHeader>
             <CardTitle>Focus Timer</CardTitle>
+             <CardDescription>
+              Use the Pomodoro Technique to boost your productivity.
+            </CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
-            <div className="text-center">
+            <div className="text-center flex flex-col items-center justify-center gap-4">
               <div className="text-5xl font-bold tracking-tighter">25:00</div>
-              <p className="text-sm text-muted-foreground">Pomodoro session in progress</p>
-              <Button className="mt-4">Start Focus</Button>
+              <p className="text-sm text-muted-foreground">A short, intense focus session.</p>
+              <Button asChild>
+                <Link href="/tools/timer">
+                  Start Focus Session
+                </Link>
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -89,10 +99,10 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-                <div className="flex items-center">
+                <div className="flex items-center p-2 rounded-md bg-accent/50">
                     <p>Review Chemistry notes (1:00 PM - 2:00 PM)</p>
                 </div>
-                 <div className="flex items-center">
+                 <div className="flex items-center p-2 rounded-md bg-accent/50">
                     <p>Work on project presentation (3:00 PM - 4:00 PM)</p>
                 </div>
             </div>
