@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -86,6 +87,6 @@
 
 @layer components {
   .card {
-    @apply backdrop-blur-sm;
+    @apply bg-card/50 backdrop-blur-sm border-border/20;
   }
 }
