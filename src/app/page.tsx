@@ -31,8 +31,8 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center text-center max-w-4xl w-full p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-white/10 shadow-lg">
             <div className="animate-fade-in flex flex-col items-center gap-4" style={{ animationDelay: '0.2s', animationDuration: '0.8s' }}>
                 <PlanifyLogo className="h-24 w-24 text-primary" />
-                <h1 className="text-5xl font-bold tracking-tight text-foreground">
-                    Planify
+                <h1 className="text-5xl font-bold tracking-tight text-primary">
+                    PLANIFY
                 </h1>
                 <p className="mt-2 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                     Smarter Schedule, Smoother Days.
