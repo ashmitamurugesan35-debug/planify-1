@@ -17,7 +17,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const bgImage = PlaceHolderImages.find(img => img.id === 'login-background');
+  const bgImage = PlaceHolderImages.find(img => img.id === 'welcome-background');
   
   return (
     <html lang="en" suppressHydrationWarning>
