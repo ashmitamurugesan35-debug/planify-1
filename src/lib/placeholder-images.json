@@ -2,9 +2,21 @@
   "placeholderImages": [
     {
       "id": "welcome-background",
-      "description": "An illustration of a cozy and organized study desk with a laptop, coffee, and calendar.",
+      "description": "A beautiful, warm illustration of a comfortable armchair next to a window, with a stack of books and a cup of coffee.",
       "imageUrl": "https://images.unsplash.com/photo-1626621341416-70421869d27a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkYXJrJTIwYWNhZGVtaWElMjBhZXN0aGV0aWN8ZW58MHx8fHwxNzE2NDAxNzgyfDA&ixlib=rb-4.0.3&q=80&w=1920",
-      "imageHint": "desk illustration"
+      "imageHint": "cozy reading nook illustration"
+    },
+    {
+      "id": "minimalist-desk",
+      "description": "A clean, top-down view of a minimalist wooden desk with a laptop, a notebook, and a small plant.",
+      "imageUrl": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtaW5pbWFsaXN0JTIwZGVza3xlbnwwfHx8fDE3MjE4MzQ5MDR8MA&ixlib=rb-4.0.3&q=80&w=1920",
+      "imageHint": "minimalist desk"
+    },
+    {
+      "id": "abstract-pastel-gradient",
+      "description": "A soft, ambient blend of pastel colors creating a calming and minimal backdrop.",
+      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXN0ZWwlJTIwZ3JhZGllbnR8ZW58MHx8fHwxNzIxODM0OTM3fDA&ixlib=rb-4.0.3&q=80&w=1920",
+      "imageHint": "pastel gradient"
     },
     {
       "id": "login-background",
