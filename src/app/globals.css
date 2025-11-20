@@ -95,18 +95,18 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(
-      135deg,
-      #cfe7ff,
-      #c7f3e3,
-      #e4d7ff,
-      #ffd9c7,
-      #ffffff
-    );
-    background-size: 600% 600%;
-    animation: gradient-animation 20s ease infinite;
+    background: linear-gradient(135deg, hsl(210, 80%, 25%), hsl(190, 80%, 30%), hsl(220, 50%, 20%));
+    background-size: 400% 400%;
+    animation: gradient-animation 25s ease infinite;
     z-index: -1;
   }
+
+  .dark .animated-background {
+    background: linear-gradient(135deg, hsl(210, 80%, 10%), hsl(190, 70%, 15%), hsl(220, 40%, 8%));
+    background-size: 400% 400%;
+    animation: gradient-animation 25s ease infinite;
+  }
+
 
   @keyframes gradient-animation {
     0% {
@@ -123,14 +123,19 @@ body {
   .shape {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
+    filter: blur(100px);
+    opacity: 0.15;
+  }
+
+  .dark .shape {
+    opacity: 0.2;
+    filter: blur(120px);
   }
 
   .shape:nth-child(1) {
     width: 400px;
     height: 400px;
-    background-color: #c7f3e3;
+    background-color: hsl(190, 80%, 60%);
     top: -100px;
     left: -100px;
     animation: float 12s ease-in-out infinite;
@@ -139,7 +144,7 @@ body {
   .shape:nth-child(2) {
     width: 500px;
     height: 500px;
-    background-color: #cfe7ff;
+    background-color: hsl(210, 80%, 60%);
     top: 10%;
     right: 5%;
     animation: float 15s ease-in-out infinite reverse;
@@ -148,7 +153,7 @@ body {
   .shape:nth-child(3) {
     width: 350px;
     height: 350px;
-    background-color: #e4d7ff;
+    background-color: hsl(220, 50%, 70%);
     bottom: -50px;
     left: 20%;
     animation: float 10s ease-in-out infinite;
@@ -157,7 +162,7 @@ body {
   .shape:nth-child(4) {
     width: 300px;
     height: 300px;
-    background-color: #ffd9c7;
+    background-color: hsl(180, 60%, 50%);
     bottom: 5%;
     right: -80px;
     animation: float 18s ease-in-out infinite reverse;
@@ -166,7 +171,7 @@ body {
   .shape:nth-child(5) {
     width: 200px;
     height: 200px;
-    background-color: #c7f3e3;
+    background-color: hsl(190, 80%, 60%);
     top: 50%;
     left: 45%;
     animation: float 14s ease-in-out infinite;
@@ -175,7 +180,7 @@ body {
    .shape:nth-child(6) {
     width: 250px;
     height: 250px;
-    background-color: #e4d7ff;
+    background-color: hsl(220, 50%, 70%);
     top: 60%;
     left: -10%;
     animation: float 16s ease-in-out infinite reverse;
@@ -192,13 +197,4 @@ body {
       transform: translateY(0px) translateX(0px) scale(1);
     }
   }
-}
-
-html.dark .animated-background {
-  opacity: 0.7;
-}
-
-html.dark .shape {
-  filter: blur(120px);
-  opacity: 0.3;
 }
