@@ -10,66 +10,62 @@ export function PlanifyLogo({ className }: { className?: string }) {
       aria-label="Planify Logo"
     >
       <defs>
-        <linearGradient id="path-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="thread-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#00F2FE" />
-          <stop offset="100%" stopColor="#437DFF" />
+          <stop offset="100%" stopColor="#4C67F8" />
         </linearGradient>
-        <linearGradient id="path-grad-2" x1="0%" y1="100%" x2="100%" y2="0%">
+        <linearGradient id="thread-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor="#7F00FF" />
-          <stop offset="50%" stopColor="#00C9FF" />
-          <stop offset="100%" stopColor="#92FE9D" />
+          <stop offset="100%" stopColor="#E100FF" />
         </linearGradient>
-         <linearGradient id="path-grad-3" x1="100%" y1="50%" x2="0%" y2="50%">
-          <stop offset="0%" stopColor="#007BFF" />
-          <stop offset="100%" stopColor="#00F2FE" />
+        <linearGradient id="thread-grad-3" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stopColor="#92FE9D" />
+          <stop offset="100%" stopColor="#00C9FF" />
         </linearGradient>
-        <radialGradient id="core-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-          <stop offset="0%" stopColor="white" stopOpacity="1" />
-          <stop offset="60%" stopColor="#92FE9D" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#0A1931" stopOpacity="0" />
-        </radialGradient>
-        <filter id="logo-glow-filter" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
-            <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-            </feMerge>
+        <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
         </filter>
+        <radialGradient id="node-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stopColor="white" stopOpacity="1" />
+            <stop offset="70%" stopColor="#92FE9D" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#0A1931" stopOpacity="0" />
+        </radialGradient>
       </defs>
 
       {/* -- Logo Icon Group -- */}
-      <g transform="translate(10, 10)" filter="url(#logo-glow-filter)">
-        {/* -- Central Glowing Orb (The AI Core) -- */}
-        <circle cx="40" cy="40" r="15" fill="url(#core-glow)" />
-        <circle cx="40" cy="40" r="6" fill="white" />
-        
-        {/* -- Star Glints -- */}
-        <path d="M40 2 L42 8 L38 8 Z" fill="white" opacity="0.8"/>
-        <path d="M78 40 L72 42 L72 38 Z" fill="white" opacity="0.8"/>
-        <path d="M2 40 L8 42 L8 38 Z" fill="white" opacity="0.8"/>
+      <g transform="translate(10, 0)" filter="url(#glow-filter)">
+        {/* -- Weaving Threads -- */}
+        <path 
+            d="M 20 80 C 40 20, 60 20, 80 80" 
+            stroke="url(#thread-grad-1)" 
+            strokeWidth="5" 
+            strokeLinecap="round"
+            fill="none" 
+        />
+        <path 
+            d="M 20 20 C 40 80, 60 80, 80 20" 
+            stroke="url(#thread-grad-2)" 
+            strokeWidth="5" 
+            strokeLinecap="round"
+            fill="none" 
+        />
+        <path 
+            d="M 50 10 C 10 50, 90 50, 50 90" 
+            stroke="url(#thread-grad-3)" 
+            strokeWidth="4"
+            strokeDasharray="4 4"
+            strokeLinecap="round"
+            fill="none" 
+        />
 
-        {/* -- Orbital Paths with Tapered Effect -- */}
-        <path 
-          d="M 50 12 A 28 28 0 0 1 76.7 23.3" 
-          stroke="url(#path-grad-1)" 
-          strokeWidth="6" 
-          strokeLinecap="round"
-          fill="none" 
-        />
-        <path 
-          d="M 12 50 A 28 28 0 0 1 23.3 13.3" 
-          stroke="url(#path-grad-2)" 
-          strokeWidth="6" 
-          strokeLinecap="round"
-          fill="none" 
-        />
-        <path 
-          d="M 60 75 A 35 35 0 0 0 75 30" 
-          stroke="url(#path-grad-3)" 
-          strokeWidth="6" 
-          strokeLinecap="round"
-          fill="none" 
-        />
+        {/* -- Glowing Nodes -- */}
+        <circle cx="50" cy="50" r="6" fill="url(#node-glow)" />
+        <circle cx="33" cy="50" r="3" fill="url(#node-glow)" opacity="0.7"/>
+        <circle cx="67" cy="50" r="3" fill="url(#node-glow)" opacity="0.7"/>
       </g>
       
       {/* -- Text -- */}
