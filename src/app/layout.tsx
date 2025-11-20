@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/AppSidebar';
 import { FirebaseErrorListener } from '@/components/FirebaseErrorListener';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export const metadata: Metadata = {
   title: 'Planify',
@@ -16,6 +17,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const backgroundImage = PlaceHolderImages.find(img => img.id === 'blurred-desk-background');
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -26,7 +29,7 @@ export default function RootLayout({
       <body 
         className="font-body antialiased"
         style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZGVzayUyMGNvZmZlZXxlbnwwfHx8fDE3MjQ2OTkyODV8MA&ixlib=rb-4.0.3&q=80&w=1920')`,
+            backgroundImage: `url('${backgroundImage?.imageUrl}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
