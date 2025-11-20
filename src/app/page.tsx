@@ -31,19 +31,19 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url(${welcomeImage?.imageUrl})`}}>
-        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl w-full p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-white/10 shadow-lg">
+        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl w-full p-6 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 shadow-lg">
             <div className="animate-fade-in flex flex-col items-center gap-4" style={{ animationDelay: '0.2s', animationDuration: '0.8s' }}>
-                <PlanifyLogo className="h-24 w-24 text-primary" />
-                <h1 className="text-5xl font-bold tracking-tight text-primary">
+                <PlanifyLogo className="h-24 w-24 text-white" />
+                <h1 className="text-5xl font-bold tracking-tight text-white">
                     PLANIFY
                 </h1>
-                <p className="mt-2 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="mt-2 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
                     Smarter Schedule, Smoother Days.
                 </p>
             </div>
 
             <div className="mt-16 animate-fade-in" style={{ animationDelay: '0.4s', animationDuration: '0.8s' }}>
-                <Button asChild size="lg" className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
+                <Button asChild size="lg" className="bg-white text-gray-800 hover:bg-gray-200 shadow-lg shadow-black/20 hover:shadow-black/30 transition-shadow">
                     <Link href="/category">START</Link>
                 </Button>
             </div>
