@@ -41,7 +41,7 @@ export default function Home() {
 
             <div className="mt-16 animate-fade-in" style={{ animationDelay: '0.4s', animationDuration: '0.8s' }}>
                 <Button asChild size="lg" className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
-                    <Link href="/login">START</Link>
+                    <Link href="/category">START</Link>
                 </Button>
             </div>
         </div>
