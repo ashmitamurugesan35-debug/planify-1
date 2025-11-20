@@ -7,7 +7,7 @@
   :root {
     --background: 35 19% 95%; /* Light Beige */
     --foreground: 24 10% 10%; /* Dark Brown */
-    --card: 35 19% 95% / 0.5; /* Translucent Light Beige for glassmorphism */
+    --card: 35 20% 90% / 0.6; /* Translucent Light Beige for glassmorphism */
     --card-foreground: 24 10% 10%;
     --popover: 35 19% 95%;
     --popover-foreground: 24 10% 10%;
@@ -76,17 +76,14 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
-    position: relative;
-    z-index: 0;
-  }
-  .dark body {
-    background-color: hsl(var(--background));
-    background-image: none;
   }
 }
 
 @layer components {
   .card {
-    @apply bg-card backdrop-blur-sm border-border;
+    @apply bg-card backdrop-blur-sm border;
+  }
+  .prose {
+    @apply text-foreground;
   }
 }

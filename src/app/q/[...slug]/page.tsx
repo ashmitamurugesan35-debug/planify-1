@@ -32,7 +32,7 @@ export default function QuestionPage({ params }: QuestionPageProps) {
   const currentQuestion = questionSet[questionIndex];
 
   return (
-    <div className='bg-transparent'>
+    <div>
       <QuestionnaireClientPage
         category={category}
         subCategory={subCategory}

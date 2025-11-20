@@ -79,8 +79,8 @@ export function ScheduleDisplay() {
 
   if (!scheduleData) {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen text-center p-4 bg-transparent">
-            <Card className="w-full max-w-2xl bg-card/50 backdrop-blur-sm">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center p-4">
+            <Card className="w-full max-w-2xl">
                 <CardHeader>
                     <CardTitle>No Schedule Found</CardTitle>
                     <CardDescription>It seems there was an issue generating your schedule.</CardDescription>
@@ -98,12 +98,12 @@ export function ScheduleDisplay() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 bg-transparent">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8">
         <Link href={backLink} className="absolute top-8 left-8 flex items-center gap-2 text-primary">
             <ArrowLeft className="h-4 w-4" />
             <span>Back</span>
         </Link>
-        <Card className="w-full max-w-4xl shadow-lg bg-card/50 backdrop-blur-sm">
+        <Card className="w-full max-w-4xl shadow-lg">
           <CardHeader>
             <CardTitle className="text-3xl font-headline text-center">Your Personalized Schedule</CardTitle>
             <CardDescription className="text-center">
@@ -133,7 +133,7 @@ export function ScheduleDisplay() {
       </div>
 
       <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <AlertDialogContent className="bg-card/50 backdrop-blur-lg">
+        <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Optimization Suggestions</AlertDialogTitle>
             <AlertDialogDescription>

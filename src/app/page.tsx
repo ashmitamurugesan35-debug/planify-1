@@ -19,14 +19,14 @@ export default function Home() {
 
   if (status === 'loading' || status === 'authenticated') {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-transparent">
+      <main className="flex min-h-screen flex-col items-center justify-center p-8">
         <PlanifyLogo className="h-32 w-auto text-primary animate-pulse" />
       </main>
     );
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent">
+    <div className="flex flex-col min-h-screen">
       <main className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
         <div className="z-10 flex flex-col items-center gap-6">
           <PlanifyLogo className="w-[320px] h-auto" />

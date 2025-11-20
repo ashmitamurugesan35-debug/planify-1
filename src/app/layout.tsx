@@ -29,21 +29,21 @@ export default function RootLayout({
       </head>
       <body 
         className="font-body antialiased"
-        style={{
-            backgroundImage: `url('${backgroundImage?.imageUrl}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-        }}
       >
-        <div className="absolute inset-0 bg-black/30 z-0"></div>
+        <div 
+          className="fixed inset-0 z-[-1] bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${backgroundImage?.imageUrl}')`,
+          }}
+        />
+        <div className="fixed inset-0 z-[-1] bg-background/50"></div>
         <Providers>
           <FirebaseErrorListener />
           <SidebarProvider>
             <Sidebar>
               <AppSidebar />
             </Sidebar>
-            <SidebarInset className="z-10">
+            <SidebarInset>
               {children}
             </SidebarInset>
           </SidebarProvider>
