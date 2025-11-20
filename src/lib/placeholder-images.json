@@ -21,7 +21,7 @@
     {
       "id": "login-background",
       "description": "A vibrant and modern university campus library.",
-      "imageUrl": "https://images.unsplash.com/photo-1564910443496-5fd2d76b47fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx1bml2ZXJzaXR5JTIwbGlicmFyeXxlbnwwfHx8fDE3NjM2MDk3ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1564910443496-5fd2d76b47fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx1bml2ZXJzaXR5JTIwbGlicmFyeXxlbnwwfHx8fDE3NjM2MDk3ODh8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "university library"
     },
     {
@@ -33,7 +33,7 @@
     {
       "id": "blurred-desk-background",
       "description": "A soft, minimalistic, aesthetic study-desk background with a blurred depth-of-field effect. Include subtle elements like a pair of glasses, a warm latte art coffee cup, faint notebooks, and gentle shadows. Use cool grey and soft beige tones with a smooth gradient. The objects should be lightly out-of-focus to avoid distracting the UI content. The overall mood should feel calm, modern, and professional — perfect for a productivity app welcome screen.",
-      "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZGVzayUyMGNvZmZlZXxlbnwwfHx8fDE3MjQ2OTkyODV8MA&ixlib=rb-4.0.3&q=80&w=1920",
+      "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZGVzayUyMGNvZmZlZXxlbnwwfHx8fDE3MjQ2OTkyODV8MA&ixlib-rb-4.0.3&q=80&w=1920",
       "imageHint": "minimal desk coffee"
     },
     {
