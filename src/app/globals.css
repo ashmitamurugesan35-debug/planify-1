@@ -5,9 +5,9 @@
 @layer base {
   :root {
     --background: 25 25% 98% / 0; /* Fully transparent to let body background show */
-    --foreground: 25 5% 20%;
+    --foreground: 30 20% 98%; /* Changed to white */
     --card: 30 40% 95% / 0.1; /* Translucent white for glassmorphism */
-    --card-foreground: 25 10% 15%;
+    --card-foreground: 30 20% 95%; /* Changed to light gray */
     --popover: 25 30% 95%;
     --popover-foreground: 25 10% 15%;
     --primary: 25 65% 55%;
@@ -15,7 +15,7 @@
     --secondary: 25 30% 90%;
     --secondary-foreground: 25 10% 20%;
     --muted: 25 30% 90%;
-    --muted-foreground: 25 10% 40%;
+    --muted-foreground: 30 20% 80%; /* Changed for better contrast */
     --accent: 25 30% 85%;
     --accent-foreground: 25 10% 10%;
     --destructive: 0 70% 50%;
@@ -37,9 +37,9 @@
 
   .dark {
     --background: 30 5% 15% / 0; /* Fully transparent */
-    --foreground: 30 20% 90%;
+    --foreground: 30 20% 98%; /* Changed to white */
     --card: 30 10% 20% / 0.1; /* Translucent dark for glassmorphism */
-    --card-foreground: 30 20% 90%;
+    --card-foreground: 30 20% 95%; /* Changed to light gray */
     --popover: 30 5% 10%;
     --popover-foreground: 30 20% 90%;
     --primary: 25 65% 55%;
@@ -47,7 +47,7 @@
     --secondary: 30 10% 25%;
     --secondary-foreground: 30 20% 90%;
     --muted: 30 10% 25%;
-    --muted-foreground: 30 20% 60%;
+    --muted-foreground: 30 20% 70%; /* Changed for better contrast */
     --accent: 30 10% 30%;
     --accent-foreground: 30 20% 90%;
     --destructive: 0 60% 45%;
