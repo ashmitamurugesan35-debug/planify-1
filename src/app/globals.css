@@ -4,26 +4,25 @@
 
 @layer base {
   :root {
-    --background: 30 50% 98% / 0; /* Fully transparent to let body background show */
-    --foreground: 30 10% 20%;
+    --background: 25 25% 98% / 0; /* Fully transparent to let body background show */
+    --foreground: 25 5% 20%;
     --card: 30 40% 95% / 0.1; /* Translucent white for glassmorphism */
-    --card-foreground: 30 10% 15%;
-    --popover: 30 50% 98%;
-    --popover-foreground: 30 10% 15%;
+    --card-foreground: 25 10% 15%;
+    --popover: 25 30% 95%;
+    --popover-foreground: 25 10% 15%;
     --primary: 25 65% 55%;
     --primary-foreground: 20 50% 98%;
-    --secondary: 30 40% 90%;
-    --secondary-foreground: 30 10% 20%;
-    --muted: 30 40% 90%;
-    --muted-foreground: 30 10% 40%;
-    --accent: 30 40% 85%;
-    --accent-foreground: 30 10% 10%;
+    --secondary: 25 30% 90%;
+    --secondary-foreground: 25 10% 20%;
+    --muted: 25 30% 90%;
+    --muted-foreground: 25 10% 40%;
+    --accent: 25 30% 85%;
+    --accent-foreground: 25 10% 10%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 30 30% 50% / 0.2;
-    --input: 30 30% 50% / 0.15;
+    --border: 25 30% 50% / 0.2;
+    --input: 25 30% 50% / 0.15;
     --ring: 25 65% 55%;
-    --radius: 0.8rem;
 
      /* Sidebar specific colors */
     --sidebar-background: 30 40% 95% / 0.5;
@@ -74,7 +73,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: #A6917C; /* Fallback color */
+    background-color: hsl(25, 20%, 85%); /* Fallback color */
     background-size: cover;
     background-position: bottom center;
     background-attachment: fixed;
