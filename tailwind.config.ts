@@ -98,7 +98,7 @@ export default {
           '100%': { 'background-position': '0% 50%' },
         },
         'wobble': {
-          '0%, 100%': { transform: 'rotate(0deg) scale(1)' },
+          '0%, 100%': { transform: 'rotate(-10deg) scale(1)' },
           '25%': { transform: 'rotate(-5deg) scale(1.1)' },
           '50%': { transform: 'rotate(5deg) scale(1.1)' },
           '75%': { transform: 'rotate(-2deg) scale(1.1)' },

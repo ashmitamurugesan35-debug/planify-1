@@ -13,8 +13,8 @@ export function WelcomeBackground() {
         <div className="absolute top-[20%] left-[20%] animate-[pulse_8s_cubic-bezier(0.4,0,0.6,1)_infinite]">
           {/* Spectacles */}
           <svg width="150" height="50" viewBox="0 0 150 50" className="opacity-40 dark:opacity-20 -rotate-12">
-            <circle cx="25" cy="25" r="20" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2.5" fill="none" />
-            <circle cx="125" cy="25" r="20" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2.5" fill="none" />
+            <circle cx="25" cy="25" r="20" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2.5" fill="hsl(var(--background) / 0.3)" />
+            <circle cx="125" cy="25" r="20" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2.5" fill="hsl(var(--background) / 0.3)" />
             <path d="M45 25 H 105" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2.5" />
           </svg>
         </div>
@@ -23,8 +23,8 @@ export function WelcomeBackground() {
           {/* Coffee Mug */}
           <svg width="120" height="140" viewBox="0 0 120 140" className="opacity-50 dark:opacity-30">
             <g transform="translate(10, 10)">
-              <path d="M10 20 H 90 V 100 C 90 111 81 120 70 120 H 30 C 19 120 10 111 10 100 V 20 Z" fill="hsl(var(--background) / 0.3)" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2" />
-              <path d="M90 40 H 105 C 115 40 115 80 105 80 H 90" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2" fill="none"/>
+              <path d="M10 20 H 90 V 100 C 90 111 81 120 70 120 H 30 C 19 120 10 111 10 100 V 20 Z" fill="hsl(var(--background) / 0.5)" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2" />
+              <path d="M90 40 H 105 C 115 40 115 80 105 80 H 90" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2" fill="hsl(var(--background) / 0.5)"/>
               {/* Vapours */}
               <path d="M30 15 Q 35 5 40 15 T 50 15" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2" fill="none" className="animate-[pulse_4s_ease-in-out_infinite]"/>
               <path d="M55 12 Q 60 2 65 12 T 75 12" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2" fill="none" className="animate-[pulse_4s_ease-in-out_1s_infinite]"/>
@@ -36,23 +36,19 @@ export function WelcomeBackground() {
           {/* Notebook */}
           <svg width="200" height="150" viewBox="0 0 200 150" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60 dark:opacity-40">
             <g transform="rotate(-10 100 75)">
-              <path d="M10 140 Q100 -10 190 140" fill="hsl(var(--background) / 0.3)" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="2"/>
-              <path d="M100 10 V 135" stroke="hsl(var(--muted-foreground) / 0.4)" strokeWidth="1.5" />
+              <rect x="5" y="5" width="190" height="140" rx="10" fill="hsl(var(--background) / 0.4)" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2" />
+              <path d="M100 5 V 145" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="1.5" />
+               {/* Flying Pages */}
+              <path d="M90 20 C 70 25, 60 40, 75 50" fill="none" stroke="hsl(var(--muted-foreground) / 0.6)" strokeWidth="2" className="animate-pulse" />
+              <path d="M90 40 C 75 45, 65 60, 80 70" fill="none" stroke="hsl(var(--muted-foreground) / 0.5)" strokeWidth="2" className="animate-pulse" style={{ animationDelay: '0.5s' }}/>
             </g>
           </svg>
           {/* Pencil */}
-           <svg width="180" height="20" viewBox="0 0 180 20" className="absolute top-[30%] right-[-10%] -rotate-[30deg] opacity-40 dark:opacity-20">
-             <path d="M10 10 H 170" stroke="hsl(50 80% 70% / 0.6)" strokeWidth="8" strokeLinecap="round"/>
-             <path d="M170 10 L 175 6 L 175 14 Z" fill="hsl(30 20% 80% / 0.5)"/>
-             <path d="M10 10 L 5 6 L 5 14 Z" fill="hsl(0 60% 80% / 0.5)"/>
+           <svg width="180" height="20" viewBox="0 0 180 20" className="absolute top-[30%] right-[-10%] -rotate-[30deg] opacity-60 dark:opacity-40">
+             <path d="M10 10 H 170" stroke="hsl(50 80% 70% / 0.8)" strokeWidth="8" strokeLinecap="round"/>
+             <path d="M170 10 L 175 6 L 175 14 Z" fill="hsl(30 20% 80% / 0.9)"/>
+             <path d="M5 10 L10 6 V 14 Z" fill="hsl(var(--foreground) / 0.5)"/>
           </svg>
-        </div>
-
-        {/* Flying Pages */}
-        <div className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2">
-            <div className="absolute top-[40%] left-[35%] w-10 h-8 bg-background/30 rounded-sm -rotate-12 opacity-60 animate-[pulse_6s_ease-in-out_infinite]"></div>
-            <div className="absolute top-[35%] left-[60%] w-12 h-10 bg-background/30 rounded -rotate-45 opacity-50 animate-[pulse_8s_ease-in-out_1s_infinite]"></div>
-            <div className="absolute top-[60%] left-[40%] w-8 h-6 bg-background/30 rounded-sm rotate-20 opacity-70 animate-[pulse_7s_ease-in-out_2s_infinite]"></div>
         </div>
       </div>
     </div>
