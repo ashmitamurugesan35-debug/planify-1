@@ -43,7 +43,7 @@ export default function Home() {
             data-ai-hint={backgroundImage.imageHint}
           />
         )}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-background/80" />
       <main className="z-10 flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
         <div className="flex flex-col items-center justify-center gap-4">
           <PlanifyLogo className="h-48 w-auto" />
