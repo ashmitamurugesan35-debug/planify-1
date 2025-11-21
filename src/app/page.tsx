@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -30,7 +31,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center">
+    <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center p-4">
       {backgroundImage && (
          <Image
             src={backgroundImage.imageUrl}
@@ -41,15 +42,17 @@ export default function Home() {
         />
       )}
       <div className="absolute inset-0 bg-black/30"></div>
-      <main className="z-10 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in text-white">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight">Planify</h1>
-        <p className="text-lg md:text-xl mt-4 max-w-md">
-          Smarter Schedule, Smoother Days.
-        </p>
-        <div className="mt-8">
-          <Button asChild size="lg" className="shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
-            <Link href="/category">Get Started</Link>
-          </Button>
+      <main className="z-10 flex flex-col items-center justify-center text-center text-white animate-fade-in">
+        <div className="bg-black/20 backdrop-blur-md rounded-2xl p-8 sm:p-12 border border-white/10 shadow-lg">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">Planify</h1>
+          <p className="text-lg md:text-xl mt-4 max-w-md">
+            Smarter Schedule, Smoother Days.
+          </p>
+          <div className="mt-8">
+            <Button asChild size="lg" className="shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+              <Link href="/category">Get Started</Link>
+            </Button>
+          </div>
         </div>
       </main>
       <Toaster />
