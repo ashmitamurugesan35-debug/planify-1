@@ -14,7 +14,7 @@ export default function Home() {
   const { status } = useUser();
   const router = useRouter();
 
-  const background = PlaceHolderImages.find(img => img.id === 'login-background');
+  const background = PlaceHolderImages.find(img => img.id === 'welcome-background');
 
   useEffect(() => {
     if (status === 'authenticated') {
