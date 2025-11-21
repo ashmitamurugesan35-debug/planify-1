@@ -125,11 +125,15 @@ function TaskList({ tasks }: { tasks: any[] }) {
 }
 
 function TaskCard({ task }: { task: any }) {
-    const [isClient, setIsClient] = useState(false);
+    const [dueDate, setDueDate] = useState<string | null>(null);
 
     useEffect(() => {
-        setIsClient(true);
-    }, []);
+        setDueDate(
+          `Due ${new Date(task.dueDate).toLocaleDateString()} • ${new Date(
+            task.dueDate
+          ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+        );
+    }, [task.dueDate]);
     
     return (
         <Card>
@@ -145,9 +149,11 @@ function TaskCard({ task }: { task: any }) {
             <CardContent className="space-y-3">
                  <div className="flex items-center text-sm text-muted-foreground h-5">
                     <Clock className="mr-2 h-4 w-4" />
-                    {isClient ? (
-                        <span>Due {new Date(task.dueDate).toLocaleDateString()} &bull; {new Date(task.dueDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                    ) : null }
+                    {dueDate ? (
+                        <span>{dueDate}</span>
+                    ) : (
+                        <div className="h-4 w-48 rounded-md bg-muted animate-pulse" />
+                    )}
                 </div>
                 {task.progress > 0 && <Progress value={task.progress} />}
                 <div className="flex items-center justify-end space-x-2 pt-2 border-t mt-2">
