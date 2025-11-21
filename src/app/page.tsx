@@ -43,7 +43,7 @@ export default function Home() {
       )}
       <div className="absolute inset-0 bg-black/30"></div>
       <main className="z-10 flex flex-col items-center justify-center text-center text-white animate-fade-in">
-        <div className="bg-black/20 backdrop-blur-md rounded-2xl p-8 sm:p-12 border border-white/10 shadow-lg shadow-primary/20 transition-all duration-300 hover:shadow-primary/30 hover:shadow-2xl">
+        <div className="bg-black/20 backdrop-blur-md rounded-2xl p-8 sm:p-12 border border-white/10 shadow-2xl shadow-primary/30 transition-all duration-300 hover:shadow-primary/40">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">Planify</h1>
           <p className="text-lg md:text-xl mt-4 max-w-md">
             Smarter Schedule, Smoother Days.
