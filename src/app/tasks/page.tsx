@@ -107,12 +107,6 @@ export default function TasksPage() {
 }
 
 function TaskList({ tasks }: { tasks: any[] }) {
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
     if (tasks.length === 0) {
         return (
             <div className="text-center py-16">
@@ -124,35 +118,47 @@ function TaskList({ tasks }: { tasks: any[] }) {
     return (
          <div className="space-y-4 mt-4">
             {tasks.map((task, index) => (
-                <Card key={index}>
-                    <CardHeader className="pb-4">
-                        <div className="flex justify-between items-start">
-                            <div>
-                                <Badge>{task.subject} - {task.type}</Badge>
-                                <CardTitle className="mt-2">{task.title}</CardTitle>
-                            </div>
-                            <Badge variant={task.priority === "High" ? "destructive" : "secondary"}>{task.priority}</Badge>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                         <div className="flex items-center text-sm text-muted-foreground">
-                            <Clock className="mr-2 h-4 w-4" />
-                            {isClient ? (
-                                <span>Due {new Date(task.dueDate).toLocaleDateString()} &bull; {new Date(task.dueDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                            ) : (
-                                <span>Loading...</span>
-                            )}
-                        </div>
-                        {task.progress > 0 && <Progress value={task.progress} />}
-                        <div className="flex items-center justify-end space-x-2 pt-2 border-t mt-2">
-                             <Button variant="ghost" size="icon"><Check className="h-4 w-4" /></Button>
-                             <Button variant="ghost" size="icon"><Clock className="h-4 w-4" /></Button>
-                             <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
-                             <Button variant="ghost" size="icon"><Users className="h-4 w-4" /></Button>
-                        </div>
-                    </CardContent>
-                </Card>
+                <TaskCard key={index} task={task} />
             ))}
         </div>
     )
+}
+
+function TaskCard({ task }: { task: any }) {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+    
+    return (
+        <Card>
+            <CardHeader className="pb-4">
+                <div className="flex justify-between items-start">
+                    <div>
+                        <Badge>{task.subject} - {task.type}</Badge>
+                        <CardTitle className="mt-2">{task.title}</CardTitle>
+                    </div>
+                    <Badge variant={task.priority === "High" ? "destructive" : "secondary"}>{task.priority}</Badge>
+                </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+                 <div className="flex items-center text-sm text-muted-foreground">
+                    <Clock className="mr-2 h-4 w-4" />
+                    {isClient ? (
+                        <span>Due {new Date(task.dueDate).toLocaleDateString()} &bull; {new Date(task.dueDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    ) : (
+                        <span>Loading...</span>
+                    )}
+                </div>
+                {task.progress > 0 && <Progress value={task.progress} />}
+                <div className="flex items-center justify-end space-x-2 pt-2 border-t mt-2">
+                     <Button variant="ghost" size="icon"><Check className="h-4 w-4" /></Button>
+                     <Button variant="ghost" size="icon"><Clock className="h-4 w-4" /></Button>
+                     <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
+                     <Button variant="ghost" size="icon"><Users className="h-4 w-4" /></Button>
+                </div>
+            </CardContent>
+        </Card>
+    );
 }
