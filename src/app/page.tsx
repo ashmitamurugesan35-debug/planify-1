@@ -28,7 +28,7 @@ export default function Home() {
     );
   }
 
-  const backgroundImage = PlaceHolderImages.find(img => img.id === 'warm-study-desk');
+  const backgroundImage = PlaceHolderImages.find(img => img.id === 'welcome-page-background');
 
   return (
     <div className="relative flex flex-col min-h-screen">
