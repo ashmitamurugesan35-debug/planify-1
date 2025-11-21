@@ -8,10 +8,10 @@ import { FirebaseErrorListener } from './FirebaseErrorListener';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAuthPage = pathname === '/'; // The welcome page is the root
+  const isAuthPage = ['/', '/login'].includes(pathname);
 
   if (isAuthPage) {
-    // For the welcome page, render children directly without the main app layout.
+    // For auth pages, render children directly without the main app layout.
     // Also include Toaster here for any auth-related toasts.
     return (
         <>
