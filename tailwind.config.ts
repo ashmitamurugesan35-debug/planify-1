@@ -99,8 +99,8 @@ export default {
           '100%': { 'background-position': '0% 50%' },
         },
         'breathing': {
-          '0%, 100%': { boxShadow: '0 0 20px 5px hsl(var(--primary)/0.2)' },
-          '50%': { boxShadow: '0 0 30px 10px hsl(var(--primary)/0.4)' },
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 40px 10px hsl(var(--primary)/0.4)' },
+          '50%': { transform: 'scale(1.01)', boxShadow: '0 0 40px 10px hsl(var(--primary)/0.4)' },
         },
       },
       animation: {
@@ -108,7 +108,7 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.6s ease-out forwards',
         'gradient-pan': 'gradient-pan 15s ease infinite',
-        'breathing': 'breathing 40s ease-in-out infinite',
+        'breathing': 'breathing 8s ease-in-out infinite',
       },
       backgroundSize: {
         '200%': '200% 200%',
