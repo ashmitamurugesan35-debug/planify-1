@@ -9,7 +9,7 @@ export function PlanifyLogo({ className }: { className?: string }) {
     >
       <defs>
         <linearGradient id="brain-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#2dd4bf', stopOpacity: 1 }} />
+          <stop offset="0%" style={{ stopColor: 'hsl(var(--primary))', stopOpacity: 1 }} />
           <stop offset="100%" style={{ stopColor: '#38bdf8', stopOpacity: 1 }} />
         </linearGradient>
         <linearGradient id="book-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -17,7 +17,7 @@ export function PlanifyLogo({ className }: { className?: string }) {
           <stop offset="100%" style={{ stopColor: '#f97316', stopOpacity: 1 }} />
         </linearGradient>
         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
+          <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -27,24 +27,19 @@ export function PlanifyLogo({ className }: { className?: string }) {
 
       {/* Main container */}
       <g transform="translate(80, 80)">
+        
         {/* Book */}
         <g transform="translate(0, 30)">
           <path
             d="M -60 0 C -60 -20, -20 -30, 0 -30 C 20 -30, 60 -20, 60 0 L 60 40 L -60 40 Z"
-            fill="#fff"
-            stroke="#d1d5db"
-            strokeWidth="3"
-          />
-          <path
-            d="M -55 35 L 55 35"
-            stroke="#d1d5db"
-            strokeWidth="2"
-            strokeLinecap="round"
+            fill="white"
+            stroke="hsl(var(--border))"
+            strokeWidth="4"
           />
           <path
             d="M 0 -30 V 40"
-            stroke="#d1d5db"
-            strokeWidth="3"
+            stroke="hsl(var(--border))"
+            strokeWidth="4"
           />
         </g>
         
@@ -57,7 +52,7 @@ export function PlanifyLogo({ className }: { className?: string }) {
         </g>
 
         {/* Graduation Cap */}
-        <g transform="translate(35, -55)">
+        <g transform="translate(35, -55) rotate(15)">
            <path d="M-15 5 L15 5 L0 15 Z" fill="#4b5563"/>
            <rect x="-20" y="-2" width="40" height="7" rx="2" fill="#4b5563"/>
            <path d="M12 -2 L12 -12 L16 -12 L16 -2 Z" fill="#f59e0b"/>
