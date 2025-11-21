@@ -14,6 +14,7 @@ import {
   Clock,
   LogOut,
   FileInput,
+  Brain,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -45,6 +46,7 @@ export function AppSidebar() {
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/calendar', label: 'Calendar', icon: Calendar },
     { href: '/tasks', label: 'Tasks & Activities', icon: ClipboardList },
+    { href: '/tasks/exams', label: 'Thinkathon', icon: Brain },
     {
       id: 'tools',
       label: 'Tools',
