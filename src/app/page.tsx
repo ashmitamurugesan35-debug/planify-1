@@ -14,7 +14,7 @@ export default function Home() {
   const { status } = useUser();
   const router = useRouter();
 
-  const background = PlaceHolderImages.find(img => img.id === 'welcome-background');
+  const background = PlaceHolderImages.find(img => img.id === 'minimalist-desk');
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -42,7 +42,7 @@ export default function Home() {
           data-ai-hint={background.imageHint}
         />
       )}
-      <div className="fixed inset-0 z-[-1] bg-black/30" />
+      <div className="fixed inset-0 z-[-1] bg-black/30 backdrop-blur-sm" />
       <main className="z-10 flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
         <div className="flex flex-col items-center justify-center gap-4">
           <PlanifyLogo className="h-48 w-auto" />
