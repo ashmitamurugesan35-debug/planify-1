@@ -98,9 +98,9 @@ export default {
           '50%': { 'background-position': '100% 50%' },
           '100%': { 'background-position': '0% 50%' },
         },
-        'float': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-2px)' },
+        'breathing': {
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 80px 15px hsl(var(--primary)/0.7)' },
+          '50%': { transform: 'scale(1.02)', boxShadow: '0 0 100px 20px hsl(var(--primary)/0.9)' },
         },
       },
       animation: {
@@ -108,9 +108,7 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.6s ease-out forwards',
         'gradient-pan': 'gradient-pan 15s ease infinite',
-        'float': 'float 20s ease-in-out infinite',
-        'float-delay-1': 'float 15s ease-in-out infinite',
-        'float-delay-2': 'float 18s ease-in-out infinite',
+        'breathing': 'breathing 8s ease-in-out infinite',
       },
       backgroundSize: {
         '200%': '200% 200%',
