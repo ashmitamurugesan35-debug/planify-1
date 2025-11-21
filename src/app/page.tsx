@@ -18,7 +18,7 @@ export default function Home() {
     }
   }, [status, router]);
 
-  const backgroundImage = PlaceHolderImages.find(img => img.id === 'welcome-page-background');
+  const backgroundImage = PlaceHolderImages.find(img => img.id === 'blurred-desk-background');
 
   if (status === 'loading' || status === 'authenticated') {
     return (
