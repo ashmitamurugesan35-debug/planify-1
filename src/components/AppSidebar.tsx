@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   Home,
   LayoutDashboard,
@@ -13,8 +13,9 @@ import {
   HelpCircle,
   Clock,
   LogOut,
-  FileInput
-} from "lucide-react"
+  FileInput,
+} from 'lucide-react';
+import Image from 'next/image';
 
 import {
   SidebarHeader,
@@ -26,34 +27,46 @@ import {
   SidebarSeparator,
   SidebarMenuSub,
   SidebarMenuSubItem,
-  SidebarMenuSubButton
-} from "@/components/ui/sidebar"
-import { Button } from "@/components/ui/button"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible"
-import { PlanifyLogo } from "./logo"
+  SidebarMenuSubButton,
+} from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from './ui/collapsible';
+import { PlanifyLogo } from './logo';
 
 export function AppSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const menuItems = [
-    { href: "/", label: "Home", icon: Home },
-    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/calendar", label: "Calendar", icon: Calendar },
-    { href: "/tasks", label: "Tasks & Activities", icon: ClipboardList },
+    { href: '/', label: 'Home', icon: Home },
+    { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { href: '/calendar', label: 'Calendar', icon: Calendar },
+    { href: '/tasks', label: 'Tasks & Activities', icon: ClipboardList },
     {
-      id: "tools",
-      label: "Tools",
+      id: 'tools',
+      label: 'Tools',
       icon: Wrench,
-      href: "/tools",
+      href: '/tools',
       subMenu: [
-        { href: "/tools/timer", label: "Focus Timer", icon: Clock },
-        { href: "/tools/notifications", label: "Notifications", icon: Bell },
-        { href: "/tools/data", label: "Data Import/Export", icon: FileInput },
-        { href: "/tools/settings", label: "Settings", icon: Settings },
-        { href: "/tools/help", label: "Help Center", icon: HelpCircle },
-      ]
+        { href: '/tools/timer', label: 'Focus Timer', icon: Clock },
+        {
+          href: '/tools/notifications',
+          label: 'Notifications',
+          icon: Bell,
+        },
+        {
+          href: '/tools/data',
+          label: 'Data Import/Export',
+          icon: FileInput,
+        },
+        { href: '/tools/settings', label: 'Settings', icon: Settings },
+        { href: '/tools/help', label: 'Help Center', icon: HelpCircle },
+      ],
     },
-  ]
+  ];
 
   return (
     <>
@@ -65,11 +78,15 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="p-2">
         <SidebarMenu>
-          {menuItems.map((item) => (
+          {menuItems.map((item) =>
             item.subMenu ? (
-              <Collapsible key={item.id} className="w-full" defaultOpen={pathname.startsWith(item.href!)}>
+              <Collapsible
+                key={item.id}
+                className="w-full"
+                defaultOpen={pathname.startsWith(item.href!)}
+              >
                 <CollapsibleTrigger asChild>
-                   <SidebarMenuItem>
+                  <SidebarMenuItem>
                     <SidebarMenuButton
                       asChild
                       isActive={pathname.startsWith(item.href || '/tools')}
@@ -84,25 +101,25 @@ export function AppSidebar() {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {item.subMenu.map(subItem => (
-                       <SidebarMenuSubItem key={subItem.href}>
-                         <SidebarMenuSubButton asChild isActive={pathname === subItem.href}>
-                            <Link href={subItem.href}>
-                                <subItem.icon />
-                                <span>{subItem.label}</span>
-                            </Link>
-                         </SidebarMenuSubButton>
-                       </SidebarMenuSubItem>
+                    {item.subMenu.map((subItem) => (
+                      <SidebarMenuSubItem key={subItem.href}>
+                        <SidebarMenuSubButton
+                          asChild
+                          isActive={pathname === subItem.href}
+                        >
+                          <Link href={subItem.href}>
+                            <subItem.icon />
+                            <span>{subItem.label}</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
                     ))}
                   </SidebarMenuSub>
                 </CollapsibleContent>
               </Collapsible>
             ) : (
               <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton
-                  asChild
-                  isActive={pathname === item.href}
-                >
+                <SidebarMenuButton asChild isActive={pathname === item.href}>
                   <Link href={item.href!}>
                     <item.icon />
                     <span>{item.label}</span>
@@ -110,22 +127,22 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             )
-          ))}
+          )}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
         <SidebarSeparator />
         <SidebarMenu>
-           <SidebarMenuItem>
-             <SidebarMenuButton asChild>
-                <Link href="/">
-                    <LogOut />
-                    <span>Logout</span>
-                </Link>
-             </SidebarMenuButton>
-           </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Link href="/">
+                <LogOut />
+                <span>Logout</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </>
-  )
+  );
 }
