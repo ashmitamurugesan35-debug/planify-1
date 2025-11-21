@@ -99,8 +99,8 @@ export default {
           '100%': { 'background-position': '0% 50%' },
         },
         'breathing': {
-          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 40px 10px hsl(var(--primary)/0.4)' },
-          '50%': { transform: 'scale(1.01)', boxShadow: '0 0 40px 10px hsl(var(--primary)/0.4)' },
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 20px 5px hsl(var(--primary)/0.4)' },
+          '50%': { transform: 'scale(1.01)', boxShadow: '0 0 30px 10px hsl(var(--primary)/0.4)' },
         },
       },
       animation: {
