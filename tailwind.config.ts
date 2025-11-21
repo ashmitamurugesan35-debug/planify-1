@@ -109,7 +109,7 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'bg-pan': 'bg-pan 15s ease-in-out infinite',
-        'wobble': 'wobble 0.5s ease-in-out',
+        'wobble': 'wobble 10s ease-in-out infinite',
       },
     },
   },

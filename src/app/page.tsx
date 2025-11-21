@@ -8,21 +8,17 @@ import { useUser } from '@/firebase/auth/use-user';
 import { Toaster } from '@/components/ui/toaster';
 import { WelcomeBackground } from '@/components/WelcomeBackground';
 
-// This is a self-contained welcome page component that includes its own layout logic
-// to avoid conflicts with the main application layout.
 export default function Home() {
   const { status } = useUser();
   const router = useRouter();
 
   useEffect(() => {
     if (status === 'authenticated') {
-      // When authenticated, redirect to the dashboard which uses the main app layout.
       router.replace('/dashboard');
     }
   }, [status, router]);
 
   if (status === 'loading' || status === 'authenticated') {
-    // Show a loading spinner while checking auth status or when redirecting.
     return (
       <div className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
         <div className="h-16 w-16 border-4 border-dashed rounded-full animate-spin border-primary/20"></div>
@@ -30,7 +26,6 @@ export default function Home() {
     );
   }
 
-  // Render the welcome page for unauthenticated users.
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
         <WelcomeBackground />
