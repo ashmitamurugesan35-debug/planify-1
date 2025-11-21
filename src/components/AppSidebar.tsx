@@ -72,7 +72,6 @@ export function AppSidebar() {
     <>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <PlanifyLogo className="h-8 w-auto" />
           <span className="text-lg font-semibold">Planify</span>
         </div>
       </SidebarHeader>
