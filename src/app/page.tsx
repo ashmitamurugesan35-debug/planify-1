@@ -29,6 +29,15 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
+        
+        <div className="flex flex-col items-center justify-center gap-4">
+          <PlanifyLogo className="h-24 w-24 text-primary" />
+          <h1 className="text-5xl font-bold tracking-tight">Planify</h1>
+          <p className="text-lg text-muted-foreground">
+            Smarter Schedule, Smoother Days.
+          </p>
+        </div>
+
         <div className="absolute bottom-16 z-10">
             <Button asChild size="lg" className="shadow-lg shadow-black/20 hover:shadow-black/30 transition-shadow">
               <Link href="/category">Start</Link>
