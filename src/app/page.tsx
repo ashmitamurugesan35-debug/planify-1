@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -6,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useUser } from '@/firebase/auth/use-user';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -39,8 +37,6 @@ export default function Home() {
     }
   }, [status, router]);
 
-  const backgroundImage = PlaceHolderImages.find(img => img.id === 'warm-study-desk');
-
   if (status === 'loading' || status === 'authenticated') {
     return (
        <LandingPageLayout>
@@ -54,8 +50,8 @@ export default function Home() {
   return (
     <LandingPageLayout>
         <div 
-        className="flex flex-col min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundImage?.imageUrl})` }}
+        className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(/bg.png)` }}
         >
         <main className="z-10 flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
             <div className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
