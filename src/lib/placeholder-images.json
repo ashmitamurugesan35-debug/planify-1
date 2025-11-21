@@ -41,6 +41,12 @@
       "description": "A seamless, full-app background illustration with a warm, cozy, aesthetic study theme. Shows an open book, a warm coffee cup, and minimal desk elements. Uses a clean, flat-illustration style with warm beige, cream, and light brown tones.",
       "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aaa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzdHVkeSUyMGRlc2t8ZW58MHx8fHwxNzI1NDE5OTgzfDA&ixlib=rb-4.0.3&q=80&w=1920",
       "imageHint": "study desk"
+    },
+    {
+      "id": "cozy-study-ambience",
+      "description": "A cozy desk setup with an open book, a cup of tea, and some plant decorations, creating a warm and inviting study atmosphere.",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkeVxlbnwwfHx8fDE3MjE4MzQ4MDN8MA&ixlib=rb-4.0.3&q=80&w=1920",
+      "imageHint": "study ambient"
     }
   ]
 }
