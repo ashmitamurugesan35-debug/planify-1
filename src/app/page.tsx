@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -8,7 +9,7 @@ import { useUser } from '@/firebase/auth/use-user';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
-// This is a simplified root layout specifically for the landing page.
+// A standalone layout for the landing page to prevent style conflicts from the main layout.
 function LandingPageLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -32,11 +33,12 @@ export default function Home() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      // When authenticated, redirect to the dashboard which uses the main layout
+      // When authenticated, redirect to the dashboard which uses the main app layout.
       router.replace('/dashboard');
     }
   }, [status, router]);
 
+  // Show a loading spinner while checking auth status or when redirecting.
   if (status === 'loading' || status === 'authenticated') {
     return (
        <LandingPageLayout>
@@ -47,23 +49,24 @@ export default function Home() {
     );
   }
 
+  // Render the welcome page for unauthenticated users.
   return (
     <LandingPageLayout>
         <div 
-        className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(/bg.png)` }}
+            className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(/bg.png)` }}
         >
-        <main className="z-10 flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
-            <div className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-800">Planify</h1>
-                <p className="text-lg text-gray-600 mt-2">Smarter Schedule, Smoother Days.</p>
-                <div className="mt-8">
-                <Button asChild size="lg" className="shadow-lg bg-gray-700 hover:bg-gray-800 text-white shadow-black/20 hover:shadow-black/30 transition-shadow">
-                    <Link href="/category">Start</Link>
-                </Button>
+            <main className="z-10 flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fade-in">
+                <div className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
+                    <h1 className="text-4xl font-bold tracking-tight text-gray-800">Planify</h1>
+                    <p className="text-lg text-gray-600 mt-2">Smarter Schedule, Smoother Days.</p>
+                    <div className="mt-8">
+                        <Button asChild size="lg" className="shadow-lg bg-gray-700 hover:bg-gray-800 text-white shadow-black/20 hover:shadow-black/30 transition-shadow">
+                            <Link href="/category">Start</Link>
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
         </div>
     </LandingPageLayout>
   );
