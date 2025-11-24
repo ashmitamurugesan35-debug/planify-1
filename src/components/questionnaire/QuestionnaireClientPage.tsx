@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -54,38 +55,10 @@ export function QuestionnaireClientPage({
     updateAnswer(data);
 
     if (isLastQuestion) {
-      setIsLoading(true);
+      // On the last question, save the final answer and redirect to login
       const allAnswers = { ...answers, ...data };
-      
-      const formattedData = getFormattedAnswers();
-      if (!formattedData) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Could not format data for submission.",
-        });
-        setIsLoading(false);
-        return;
-      }
-      
-      // The context already has all answers, so let's use what it provides after the final update.
-      const finalPayload = { ...formattedData, ...data };
-
-      const result = await createSchedule(finalPayload);
-      setIsLoading(false);
-
-      if (result.success && result.data) {
-        // Storing schedule in session storage to be picked up by schedule page
-        // to avoid long URL.
-        sessionStorage.setItem('scheduleData', JSON.stringify(result.data));
-        router.push(`/schedule`);
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Generation Failed",
-          description: result.error || "An unknown error occurred.",
-        });
-      }
+      sessionStorage.setItem('questionnaireAnswers', JSON.stringify(allAnswers));
+      router.push('/login');
     } else {
       router.push(`/q/${category}/${subCategory}/${questionIndex + 1}`);
     }
@@ -138,7 +111,7 @@ export function QuestionnaireClientPage({
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Generating...
+                      Please wait...
                     </>
                   ) : isLastQuestion ? (
                     'Continue'
