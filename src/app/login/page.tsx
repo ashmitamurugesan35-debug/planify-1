@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -17,6 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const GoogleIcon = () => (
     <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
@@ -52,7 +53,12 @@ export default function LoginPage() {
     const router = useRouter();
     const { toast } = useToast();
     const [isLoading, setIsLoading] = useState(false);
+    const [isClient, setIsClient] = useState(false);
     
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const backgroundImage = PlaceHolderImages.find(p => p.id === 'login-background');
 
     const handleGoogleSignIn = async () => {
@@ -83,34 +89,45 @@ export default function LoginPage() {
                         <CardDescription className="text-white/80">Sign in or create an account to continue.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <Tabs defaultValue="signin" className="w-full">
-                            <TabsList className="grid w-full grid-cols-2 bg-white/10 text-white/70">
-                                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                                <TabsTrigger value="signup">Sign Up</TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="signin">
-                                <SignInForm setIsLoading={setIsLoading} isLoading={isLoading} />
-                            </TabsContent>
-                            <TabsContent value="signup">
-                                <SignUpForm setIsLoading={setIsLoading} isLoading={isLoading} />
-                            </TabsContent>
-                        </Tabs>
-
-                        <div className="relative my-6">
-                            <div className="absolute inset-0 flex items-center">
-                                <span className="w-full border-t border-white/30" />
+                        {!isClient ? (
+                            <div className="space-y-4">
+                                <Skeleton className="h-10 w-full" />
+                                <Skeleton className="h-10 w-full" />
+                                <Skeleton className="h-10 w-full" />
+                                <Skeleton className="h-10 w-full" />
                             </div>
-                            <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-black/40 px-2 text-white/80">
-                                    Or continue with
-                                </span>
-                            </div>
-                        </div>
+                        ) : (
+                            <>
+                                <Tabs defaultValue="signin" className="w-full">
+                                    <TabsList className="grid w-full grid-cols-2 bg-white/10 text-white/70">
+                                        <TabsTrigger value="signin">Sign In</TabsTrigger>
+                                        <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                                    </TabsList>
+                                    <TabsContent value="signin">
+                                        <SignInForm setIsLoading={setIsLoading} isLoading={isLoading} />
+                                    </TabsContent>
+                                    <TabsContent value="signup">
+                                        <SignUpForm setIsLoading={setIsLoading} isLoading={isLoading} />
+                                    </TabsContent>
+                                </Tabs>
 
-                        <Button onClick={handleGoogleSignIn} className="w-full bg-white text-black hover:bg-gray-200" disabled={isLoading}>
-                           <GoogleIcon />
-                            Sign in with Google
-                        </Button>
+                                <div className="relative my-6">
+                                    <div className="absolute inset-0 flex items-center">
+                                        <span className="w-full border-t border-white/30" />
+                                    </div>
+                                    <div className="relative flex justify-center text-xs uppercase">
+                                        <span className="bg-black/40 px-2 text-white/80">
+                                            Or continue with
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <Button onClick={handleGoogleSignIn} className="w-full bg-white text-black hover:bg-gray-200" disabled={isLoading}>
+                                <GoogleIcon />
+                                    Sign in with Google
+                                </Button>
+                            </>
+                        )}
                     </CardContent>
                 </Card>
             </div>
@@ -182,9 +199,25 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
 
     const handleEmailSubmit = async (data: z.infer<typeof signUpSchema>) => {
         setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        toast({ title: 'Sign Up Successful', description: 'Redirecting...' });
-        router.push('/dashboard');
+        // On the last question, save the final answer and redirect to the schedule page
+        const questionnaireAnswers = sessionStorage.getItem('questionnaireAnswers');
+        const formattedAnswers = questionnaireAnswers ? JSON.parse(questionnaireAnswers) : {};
+        
+        // You would typically associate the answers with the new user account here.
+        // For now, we'll just log them and proceed.
+        console.log('User signed up with data:', data);
+        console.log('Questionnaire answers:', formattedAnswers);
+
+        // Here, we would call the AI to generate the schedule.
+        // For now, we'll just simulate it.
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        const scheduleResponse = { schedule: `This is a placeholder schedule for ${data.displayName}.` };
+
+        sessionStorage.setItem('scheduleData', JSON.stringify(scheduleResponse));
+
+        toast({ title: 'Sign Up Successful', description: 'Generating your schedule...' });
+        router.push('/schedule');
         setIsLoading(false);
     };
 
