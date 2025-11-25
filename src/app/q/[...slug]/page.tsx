@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import { questions } from '@/lib/questions';
 import { QuestionnaireClientPage } from '@/components/questionnaire/QuestionnaireClientPage';

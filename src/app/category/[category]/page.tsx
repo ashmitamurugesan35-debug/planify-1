@@ -31,7 +31,7 @@ export default function SubCategoryPage() {
     if (category === 'academics' || category === 'personal') {
       setCategory(category);
     }
-    if (sub === 'student' || sub === 'professor' || sub === 'management') {
+    if (sub.toLowerCase() === 'student' || sub.toLowerCase() === 'professor' || sub.toLowerCase() === 'management') {
       setSubCategory(sub.toLowerCase() as "student" | "professor" | "management");
     }
 

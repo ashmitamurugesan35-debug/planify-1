@@ -61,24 +61,7 @@ export function QuestionnaireClientPage({
     updateAnswer(data);
 
     if (isLastQuestion) {
-       setIsLoading(true);
-       const formattedAnswers = getFormattedAnswers();
-       const allAnswers = { ...formattedAnswers, ...data };
-       
-       const result = await createSchedule(allAnswers);
-       
-       if (result.success) {
-           sessionStorage.setItem('scheduleData', JSON.stringify(result.data));
-           toast({ title: 'Schedule Generated!', description: 'Redirecting to your new timetable.' });
-           router.push('/schedule');
-       } else {
-           toast({
-               variant: 'destructive',
-               title: 'Generation Failed',
-               description: result.error,
-           });
-           setIsLoading(false);
-       }
+      router.push('/dashboard');
     } else {
       router.push(`/q/${category}/${subCategory}/${questionIndex + 1}`);
     }
@@ -140,10 +123,10 @@ export function QuestionnaireClientPage({
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating...
+                        Submitting...
                       </>
                     ) : isLastQuestion ? (
-                      'Generate Schedule'
+                      'Finish'
                     ) : (
                       'Next'
                     )}

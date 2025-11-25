@@ -67,7 +67,7 @@ export default function LoginPage() {
         // Simulate a network request
         await new Promise(resolve => setTimeout(resolve, 1000));
         toast({ title: 'Login Successful', description: 'Redirecting...' });
-        router.push('/dashboard');
+        router.push('/category');
         setIsLoading(false);
     };
 
@@ -85,7 +85,7 @@ export default function LoginPage() {
             <div className="absolute inset-0 bg-black/50"></div>
             <div className="relative flex min-h-screen items-center justify-center p-4">
                  <Button asChild variant="ghost" className="absolute top-8 left-8 text-white hover:bg-white/10 hover:text-white">
-                    <Link href="/q/academics/student/4">
+                    <Link href="/">
                        <ArrowLeft className="mr-2 h-4 w-4" />
                        Back
                     </Link>
@@ -154,7 +154,7 @@ function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
         setIsLoading(true);
         await new Promise(resolve => setTimeout(resolve, 1000));
         toast({ title: 'Login Successful', description: 'Redirecting...' });
-        router.push('/dashboard');
+        router.push('/category');
         setIsLoading(false);
     };
 
@@ -206,25 +206,13 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
 
     const handleEmailSubmit = async (data: z.infer<typeof signUpSchema>) => {
         setIsLoading(true);
-        // On the last question, save the final answer and redirect to the schedule page
-        const questionnaireAnswers = sessionStorage.getItem('questionnaireAnswers');
-        const formattedAnswers = questionnaireAnswers ? JSON.parse(questionnaireAnswers) : {};
         
-        // You would typically associate the answers with the new user account here.
-        // For now, we'll just log them and proceed.
         console.log('User signed up with data:', data);
-        console.log('Questionnaire answers:', formattedAnswers);
 
-        // Here, we would call the AI to generate the schedule.
-        // For now, we'll just simulate it.
         await new Promise(resolve => setTimeout(resolve, 1500));
         
-        const scheduleResponse = { schedule: `This is a placeholder schedule for ${data.displayName}.` };
-
-        sessionStorage.setItem('scheduleData', JSON.stringify(scheduleResponse));
-
-        toast({ title: 'Sign Up Successful', description: 'Generating your schedule...' });
-        router.push('/schedule');
+        toast({ title: 'Sign Up Successful', description: 'Redirecting to next step...' });
+        router.push('/category');
         setIsLoading(false);
     };
 
