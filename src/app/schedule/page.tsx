@@ -1,7 +1,7 @@
+
 'use client';
 
-import { ArrowLeft, Download } from 'lucide-react';
-import Link from 'next/link';
+import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -71,12 +71,6 @@ export default function SchedulePage() {
   return (
     <div className="flex flex-col h-screen bg-background">
       <header className="flex items-center justify-between p-4 border-b sticky top-0 bg-background/95 z-20">
-        <Link href={backLink}>
-            <Button variant="ghost">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
-            </Button>
-        </Link>
         <h1 className="text-xl font-bold font-headline">Your AI-Generated Timetable</h1>
         <div className="flex items-center gap-2">
            <Button variant="outline" size="sm" onClick={() => router.push('/dashboard')}>Go to Dashboard</Button>
