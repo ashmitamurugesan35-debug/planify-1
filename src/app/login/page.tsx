@@ -16,8 +16,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowLeft } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link';
 
 const GoogleIcon = () => (
     <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
@@ -83,6 +84,12 @@ export default function LoginPage() {
             )}
             <div className="absolute inset-0 bg-black/50"></div>
             <div className="relative flex min-h-screen items-center justify-center p-4">
+                 <Button asChild variant="ghost" className="absolute top-8 left-8 text-white hover:bg-white/10 hover:text-white">
+                    <Link href="/q/academics/student/4">
+                       <ArrowLeft className="mr-2 h-4 w-4" />
+                       Back
+                    </Link>
+                </Button>
                 <Card className="w-full max-w-sm animate-fade-in shadow-2xl border-white/20 bg-black/40 text-white backdrop-blur-sm">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl">Welcome!</CardTitle>

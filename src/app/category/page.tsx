@@ -10,7 +10,7 @@ export default function CategoryPage() {
        <Link href="/" className="absolute top-8 left-8">
           <Button variant="ghost">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            Back
           </Button>
         </Link>
       <div className="flex flex-col items-center gap-4 text-center w-full max-w-md">

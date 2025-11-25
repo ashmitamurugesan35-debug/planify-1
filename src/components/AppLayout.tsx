@@ -4,16 +4,18 @@ import { usePathname } from 'next/navigation';
 import { Sidebar, SidebarInset, SidebarProvider } from './ui/sidebar';
 import { AppSidebar } from './AppSidebar';
 import { Toaster } from './ui/toaster';
+import { Header } from './Header';
 
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   // Pages that should not have the main app sidebar
-  const noSidebarPaths = ['/', '/login', '/schedule'];
+  const noSidebarPaths = ['/', '/login'];
   
   const isNoSidebarPage = noSidebarPaths.includes(pathname) || 
                           pathname.startsWith('/category') || 
-                          pathname.startsWith('/q');
+                          pathname.startsWith('/q') ||
+                          pathname.startsWith('/schedule');
 
   if (isNoSidebarPage) {
     // For auth and onboarding pages, render children directly without the main app layout.
@@ -33,6 +35,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           <AppSidebar />
         </Sidebar>
         <SidebarInset>
+          <Header />
           {children}
         </SidebarInset>
       </SidebarProvider>
