@@ -19,11 +19,6 @@ export function Header() {
     setIsClient(true);
   }, []);
 
-  if (!isClient) {
-    // Render a placeholder or nothing on the server to avoid hydration mismatch
-    return <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 sticky top-0 z-30"></header>;
-  }
-
   const getInitials = (name: string | null | undefined) => {
     if (!name) return 'U';
     const names = name.split(' ');
@@ -50,7 +45,6 @@ export function Header() {
             <>
                 <div className="text-right hidden sm:block">
                     <p className="text-sm font-medium leading-none">{user.displayName || 'Welcome'}</p>
-                    <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                 </div>
                  <Avatar>
                     {user.photoURL ? <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} /> : null}
