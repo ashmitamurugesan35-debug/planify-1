@@ -66,6 +66,7 @@ export function QuestionnaireClientPage({
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const newAnswers = { ...answers, ...data };
     updateAnswer(data);
 
     if (isLastQuestion) {
@@ -80,7 +81,7 @@ export function QuestionnaireClientPage({
         if (user && firestore) {
           // Save answers to user's profile
           const userRef = doc(firestore, 'users', user.uid);
-          const payload = { answers: { ...answers, ...data } };
+          const payload = { answers: newAnswers };
           setDoc(userRef, payload, { merge: true }).catch(async (serverError) => {
             const permissionError = new FirestorePermissionError({
               path: userRef.path,

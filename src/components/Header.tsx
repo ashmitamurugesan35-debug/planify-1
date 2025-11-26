@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
-import { ArrowLeft, UserCircle } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
 import { useUser } from '@/firebase/auth/use-user';
 import { Skeleton } from './ui/skeleton';
@@ -50,7 +50,7 @@ export function Header() {
               <PopoverTrigger asChild>
                 <div className="flex items-center gap-3 cursor-pointer">
                   <div className="text-right hidden sm:block">
-                      <p className="text-sm font-medium leading-none">{user.displayName || 'Welcome'}</p>
+                      <p className="text-sm font-medium leading-none">Hello, {user.displayName || 'User'}</p>
                   </div>
                   <Avatar>
                       {user.photoURL ? <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} /> : null}
