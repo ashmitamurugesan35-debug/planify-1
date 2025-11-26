@@ -93,7 +93,7 @@ export default function LoginPage() {
                 <Card className="w-full max-w-sm animate-fade-in shadow-2xl border-white/20 bg-black/40 text-white backdrop-blur-sm">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl">Welcome!</CardTitle>
-                        <CardDescription className="text-white/80">Sign in or create an account to continue.</CardDescription>
+                        <CardDescription className="text-white/80">Create an account or sign in to continue.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         {!isClient ? (
@@ -105,16 +105,16 @@ export default function LoginPage() {
                             </div>
                         ) : (
                             <>
-                                <Tabs defaultValue="signin" className="w-full">
+                                <Tabs defaultValue="signup" className="w-full">
                                     <TabsList className="grid w-full grid-cols-2 bg-white/10 text-white/70">
-                                        <TabsTrigger value="signin">Sign In</TabsTrigger>
                                         <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                                        <TabsTrigger value="signin">Sign In</TabsTrigger>
                                     </TabsList>
-                                    <TabsContent value="signin">
-                                        <SignInForm setIsLoading={setIsLoading} isLoading={isLoading} />
-                                    </TabsContent>
                                     <TabsContent value="signup">
                                         <SignUpForm setIsLoading={setIsLoading} isLoading={isLoading} />
+                                    </TabsContent>
+                                    <TabsContent value="signin">
+                                        <SignInForm setIsLoading={setIsLoading} isLoading={isLoading} />
                                     </TabsContent>
                                 </Tabs>
 
@@ -266,3 +266,5 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
         </Form>
     );
 }
+
+    
