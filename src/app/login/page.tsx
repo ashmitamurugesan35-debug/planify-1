@@ -13,7 +13,7 @@ import {
   updateProfile,
   GoogleAuthProvider,
   signInWithPopup,
-  getAuth,
+  getAdditionalUserInfo,
 } from 'firebase/auth';
 
 import { Button } from '@/components/ui/button';
@@ -77,9 +77,14 @@ export default function LoginPage() {
         setIsLoading(true);
         const provider = new GoogleAuthProvider();
         try {
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+            const additionalInfo = getAdditionalUserInfo(result);
             toast({ title: 'Login Successful', description: 'Redirecting...' });
-            router.push('/category');
+            if (additionalInfo?.isNewUser) {
+                router.push('/category');
+            } else {
+                router.push('/dashboard');
+            }
         } catch (error: any) {
             console.error(error);
             toast({
@@ -178,7 +183,7 @@ function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
         try {
             await signInWithEmailAndPassword(auth, data.email, data.password);
             toast({ title: 'Login Successful', description: 'Redirecting...' });
-            router.push('/category');
+            router.push('/dashboard');
         } catch (error: any) {
             console.error(error);
             let description = 'An unknown error occurred.';
@@ -322,5 +327,7 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
         </Form>
     );
 }
+
+    
 
     
