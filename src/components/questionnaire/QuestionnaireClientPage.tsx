@@ -9,9 +9,10 @@ import * as z from 'zod';
 import { useQuestionnaire } from '@/context/QuestionnaireProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Progress } from '@/components/ui/progress';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { createSchedule } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, ArrowLeft } from 'lucide-react';
@@ -61,22 +62,45 @@ export function QuestionnaireClientPage({
     updateAnswer(data);
 
     if (isLastQuestion) {
-      router.push('/dashboard');
+      setIsLoading(true);
+      const formattedAnswers = getFormattedAnswers();
+      // Important: merge the final answer before submitting
+      const finalAnswers = { ...formattedAnswers, ...data };
+      
+      const result = await createSchedule(finalAnswers);
+      setIsLoading(false);
+      
+      if (result.success && result.data) {
+        toast({
+          title: 'Schedule Generated!',
+          description: 'Redirecting you to your new schedule.',
+        });
+        sessionStorage.setItem('scheduleData', JSON.stringify(result.data));
+        router.push('/schedule');
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Uh oh! Something went wrong.',
+          description: result.error || 'Could not generate the schedule. Please try again.',
+        });
+      }
     } else {
       router.push(`/q/${category}/${subCategory}/${questionIndex + 1}`);
     }
   }
 
+  const InputComponent = currentQuestion.type === 'textarea' ? Textarea : Input;
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 animate-fade-in relative">
         <Button
             variant="ghost"
-            size="icon"
             onClick={() => router.back()}
             disabled={isLoading}
-            className="absolute top-8 left-8"
+            className="absolute top-8 left-8 flex items-center gap-2"
         >
-            <ArrowLeft className="h-5 w-5" />
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back</span>
         </Button>
       <Card className="w-full max-w-xl shadow-2xl">
         <CardHeader>
@@ -104,7 +128,7 @@ export function QuestionnaireClientPage({
                     <FormItem>
                       <FormLabel className="sr-only">{currentQuestion.question}</FormLabel>
                       <FormControl>
-                        <Input
+                        <InputComponent
                           type={currentQuestion.type}
                           placeholder="Type your answer here..."
                           {...field}
@@ -123,10 +147,10 @@ export function QuestionnaireClientPage({
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Submitting...
+                        Generating Schedule...
                       </>
                     ) : isLastQuestion ? (
-                      'Finish'
+                      'Generate Schedule'
                     ) : (
                       'Next'
                     )}

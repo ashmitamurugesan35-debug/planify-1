@@ -3,8 +3,8 @@
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
-type Category = 'academics' | 'personal' | null;
-type SubCategory = 'student' | 'professor' | 'management' | null;
+type Category = 'academics' | null;
+type SubCategory = 'student' | 'teacher' | null;
 type Answers = { [key: string]: string };
 
 interface QuestionnaireContextType {
@@ -36,28 +36,15 @@ export const QuestionnaireProvider = ({ children }: { children: ReactNode }) => 
   }, []);
 
   const getFormattedAnswers = () => {
-    if (!category) return null;
+    if (!subCategory) return null;
 
     const allAnswers = { ...answers };
+    const role = subCategory.charAt(0).toUpperCase() + subCategory.slice(1);
     
-    if (category === 'personal') {
-        const { ...rest } = allAnswers;
-        return {
-            category: 'Personal',
-            ...rest,
-        };
-    }
-
-    if (category === 'academics' && subCategory) {
-        const subCategoryCapitalized = subCategory.charAt(0).toUpperCase() + subCategory.slice(1);
-        const { ...rest } = allAnswers;
-        return {
-            category: 'Academics',
-            subCategory: subCategoryCapitalized,
-            ...rest,
-        };
-    }
-    return null;
+    return {
+        role,
+        ...allAnswers,
+    };
   };
 
   return (

@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -11,54 +12,35 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
+const StudentInputSchema = z.object({
+  role: z.literal('Student'),
+  classInfo: z.string().describe('The student\'s class, year, or semester.'),
+  subjects: z.string().describe('A comma-separated list of subjects the student is taking.'),
+  hoursPerSubject: z.string().describe('The number of hours the student wants to dedicate to each subject per week.'),
+  studyTime: z.string().describe('The student\'s preferred study time (e.g., morning, afternoon, evening, night).'),
+  availability: z.string().describe('The student\'s available days and time slots for studying.'),
+  breakPreferences: z.string().describe('The student\'s preferred break duration and frequency (e.g., 15 mins every hour).'),
+  prioritySubjects: z.string().describe('A list of subjects prioritized as high, medium, or low.'),
+  deadlines: z.string().describe('Information about upcoming exams or assignment deadlines.'),
+  routines: z.string().describe('Information about the student\'s additional routines like sleep schedule, meal times, commute, gym, etc.'),
+});
+
+const TeacherInputSchema = z.object({
+  role: z.literal('Teacher'),
+  subjects: z.string().describe('A comma-separated list of subjects the teacher teaches.'),
+  weeklyClasses: z.string().describe('The number of weekly classes for each subject.'),
+  classNames: z.string().describe('The names of the classes or sections the teacher handles (e.g., 10A, 10B).'),
+  availability: z.string().describe('The teacher\'s available days and time slots for teaching.'),
+  teachingHours: z.string().describe('The teacher\'s preferred teaching hours.'),
+  restrictedHours: z.string().describe('Time slots that are restricted due to meetings, duties, or breaks.'),
+  maxClassesPerDay: z.string().describe('The maximum number of classes the teacher can handle in a single day.'),
+  minGap: z.string().describe('The minimum gap required between consecutive classes.'),
+  specialSessions: z.string().describe('Information about any special sessions like labs, practicals, or extra classes.'),
+});
+
 const PersonalizedScheduleGenerationInputSchema = z.union([
-  z.object({
-    category: z.literal('Personal'),
-    careerPath: z.string().describe('The user\'s desired career path.'),
-    workHours: z.string().describe('The number of extra hours the user works.'),
-    preferredTime: z.string().describe('The user\'s preferred time for activities.'),
-  }),
-  z.object({
-    category: z.literal('Academics'),
-    subCategory: z.literal('Student'),
-    collegeName: z.string().describe('The name of the college.'),
-    rollNumber: z.string().describe('The student\'s roll number.'),
-    emailId: z.string().describe('The student\'s email ID.'),
-    department: z.string().describe('The student\'s department.'),
-    hardSubject: z.string().describe('The subject the student finds difficult.'),
-  }),
-  z.object({
-    category: z.literal('Academics'),
-    subCategory: z.literal('Professor'),
-    collegeName: z.string().describe('The name of the college.'),
-    subjectHandled: z.string().describe('The subject the professor handles.'),
-    emailId: z.string().describe('The professor\'s email ID.'),
-    availableDays: z.string().describe('The days of the week the professor is available.'),
-    preferredTimeSlots: z.string().describe('The preferred time slots for the professor (Morning/Afternoon).'),
-    hoursPerWeek: z.string().describe('The number of hours per week the professor needs.'),
-    specialLabHours: z.string().describe('Whether the professor needs special lab hours.'),
-    otherDepartmentClasses: z.string().describe('Whether the professor handles other department classes.'),
-    regularDuties: z
-      .string()
-      .describe('Any regular duties the professor has (NSS, NCC, Exam Cell, Counseling Hour).'),
-  }),
-  z.object({
-    category: z.literal('Academics'),
-    subCategory: z.literal('Management'),
-    collegeName: z.string().describe('The name of the college.'),
-    university: z.string().describe('The university under which the college falls.'),
-    coursesOffered: z.string().describe('The courses offered by the college.'),
-    numberOfDepartments: z.string().describe('The number of departments in the college.'),
-    workingDays: z.string().describe('The number of working days in the semester.'),
-    sectionsPerDepartment: z.string().describe('The number of sections per department.'),
-    staffAllocation: z.string().describe('The staff allocation per department.'),
-    collegeTiming: z.string().describe('The college timing.'),
-    hoursPerDay: z.string().describe('The number of hours per day.'),
-    periodDuration: z.string().describe('The duration of each period.'),
-    breakLunchTime: z.string().describe('The break and lunch time.'),
-    numberOfClassrooms: z.string().describe('The number of classrooms.'),
-    studentsPerClassroom: z.string().describe('The number of students per classroom.'),
-  }),
+  StudentInputSchema,
+  TeacherInputSchema,
 ]);
 
 export type PersonalizedScheduleGenerationInput = z.infer<typeof PersonalizedScheduleGenerationInputSchema>;
@@ -68,12 +50,13 @@ const ScheduleEventSchema = z.object({
   day: z.enum(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]),
   startTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format (HH:MM)'),
   endTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format (HH:MM)'),
-  type: z.enum(["Class", "Assignment", "Exam", "Task", "Study Time", "Personal", "Custom"]),
-  description: z.string().optional(),
+  type: z.enum(["Class", "Study", "Revision", "Break", "Meal", "Commute", "Gym", "Sleep", "Task", "Lab", "Practical", "Meeting", "Personal"]),
+  description: z.string().optional().describe('A brief description of the event.'),
 });
 
 const PersonalizedScheduleGenerationOutputSchema = z.object({
   schedule: z.array(ScheduleEventSchema).describe('An array of events for the generated personalized schedule.'),
+  summary: z.string().describe('A short explanation of why the generated timetable is optimized for the user.'),
 });
 
 export type PersonalizedScheduleGenerationOutput = z.infer<typeof PersonalizedScheduleGenerationOutputSchema>;
@@ -88,50 +71,59 @@ const prompt = ai.definePrompt({
   name: 'personalizedScheduleGenerationPrompt',
   input: {schema: PersonalizedScheduleGenerationInputSchema},
   output: {schema: PersonalizedScheduleGenerationOutputSchema},
-  prompt: `You are an AI schedule generator. Based on the information provided, create a personalized weekly schedule. The output must be a structured JSON array of event objects. Create at least 10-15 events for the week. Be creative and fill the schedule with relevant activities based on the user's profile.
+  prompt: `You are an expert AI Timetable Generator for the Planify App. Your job is to create a perfect, optimized weekly timetable based on the user's role and their answers to a series of questions.
 
-  Here is the information:
-  {{#eq category "Personal"}}
-  Career Path: {{{careerPath}}}
-  Work Hours: {{{workHours}}}
-  Preferred Time: {{{preferredTime}}}
+  **User Information:**
+  Role: {{{role}}}
+
+  {{#eq role "Student"}}
+  Class/Year/Semester: {{{classInfo}}}
+  Subjects: {{{subjects}}}
+  Hours per Subject per Week: {{{hoursPerSubject}}}
+  Preferred Study Time: {{{studyTime}}}
+  Availability: {{{availability}}}
+  Break Preferences: {{{breakPreferences}}}
+  Priority Subjects: {{{prioritySubjects}}}
+  Upcoming Exams/Deadlines: {{{deadlines}}}
+  Additional Routines: {{{routines}}}
   {{/eq}}
-  {{#eq category "Academics"}}
-    {{#eq subCategory "Student"}}
-      College Name: {{{collegeName}}}
-      Roll Number: {{{rollNumber}}}
-      Email ID: {{{emailId}}}
-      Department: {{{department}}}
-      Hard Subject: {{{hardSubject}}}
-      Generate a creative and balanced weekly schedule for a student. Include class times, dedicated study sessions (especially for the hard subject), breaks, and some personal/leisure activities.
-    {{/eq}}
-    {{#eq subCategory "Professor"}}
-      College Name: {{{collegeName}}}
-      Subject Handled: {{{subjectHandled}}}
-      Email ID: {{{emailId}}}
-      Available Days: {{{availableDays}}}
-      Preferred Time Slots: {{{preferredTimeSlots}}}
-      Hours Per Week: {{{hoursPerWeek}}}
-      Special Lab Hours: {{{specialLabHours}}}
-      Other Department Classes: {{{otherDepartmentClasses}}}
-      Regular Duties: {{{regularDuties}}}
-    {{/eq}}
-    {{#eq subCategory "Management"}}
-      College Name: {{{collegeName}}}
-      University: {{{university}}}
-      Courses Offered: {{{coursesOffered}}}
-      Number of Departments: {{{numberOfDepartments}}}
-      Working Days: {{{workingDays}}}
-      Sections Per Department: {{{sectionsPerDepartment}}}
-      Staff Allocation: {{{staffAllocation}}}
-      College Timing: {{{collegeTiming}}}
-      Hours Per Day: {{{hoursPerDay}}}
-      Period Duration: {{{periodDuration}}}
-      Break Lunch Time: {{{breakLunchTime}}}
-      Number of Classrooms: {{{numberOfClassrooms}}}
-      Students Per Classroom: {{{studentsPerClassroom}}}
-    {{/eq}}
+
+  {{#eq role "Teacher"}}
+  Subjects Taught: {{{subjects}}}
+  Weekly Classes per Subject: {{{weeklyClasses}}}
+  Class/Section Names: {{{classNames}}}
+  Availability: {{{availability}}}
+  Preferred Teaching Hours: {{{teachingHours}}}
+  Restricted Hours: {{{restrictedHours}}}
+  Maximum Classes per Day: {{{maxClassesPerDay}}}
+  Minimum Gap Between Classes: {{{minGap}}}
+  Special Sessions (Labs, etc.): {{{specialSessions}}}
   {{/eq}}
+
+  **Timetable Generation Rules:**
+
+  **General (For Both Roles):**
+  - **No Overlapping:** Ensure no two events are scheduled at the same time.
+  - **Balanced Workload:** Distribute tasks and classes evenly throughout the week.
+  - **Avoid Burnout:** Do not schedule too many heavy or demanding sessions back-to-back.
+  - **Breaks:** Incorporate breaks every 1-2 hours. Use the user's break preferences.
+  - **Respect Preferences:** Strictly adhere to the user's specified availability, preferred times, and restricted hours.
+  - **Creative Filling:** Creatively and logically fill the entire week from Monday to Sunday, including routines like meals, sleep, and commute, based on the user's input. Generate at least 20-30 events for a full week schedule.
+  - **Event Types**: Use a variety of event types from the allowed enum list, such as "Class", "Study", "Break", "Meal", "Commute", "Gym", "Sleep", etc.
+
+  **For Students:**
+  - **Prioritize Subjects:** Schedule high-priority or difficult subjects during the user's preferred high-focus study times.
+  - **Revision Blocks:** Include specific time slots for revision, especially for subjects with upcoming exams.
+  - **Lighter Weekends:** Keep weekends relatively light unless exams are near, focusing on revision or personal time.
+
+  **For Teachers:**
+  - **Limit Continuous Classes:** Avoid scheduling more than 2-3 classes consecutively without a break.
+  - **Even Distribution:** Distribute classes for various subjects and sections evenly across the week.
+  - **Long Slots:** Schedule special sessions like labs or practicals in longer, uninterrupted time blocks.
+
+  **Final Output:**
+  1.  Generate a \`schedule\` array containing all the events for the week in a clean, structured format.
+  2.  Write a concise \`summary\` explaining *why* the generated timetable is optimized for the user, highlighting how you've used their preferences and balanced their workload.
   `,
 });
 

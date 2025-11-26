@@ -2,7 +2,7 @@
 export type Question = {
   id: string;
   question: string;
-  type: 'text' | 'email' | 'number';
+  type: 'text' | 'email' | 'number' | 'textarea';
 };
 
 type QuestionSet = {
@@ -12,46 +12,28 @@ type QuestionSet = {
 };
 
 export const questions: QuestionSet = {
-  personal: {
-    student: [
-      { id: 'careerPath', question: 'What career path are you interested in?', type: 'text' },
-      { id: 'workHours', question: 'How many extra hours do you work for?', type: 'text' },
-      { id: 'preferredTime', question: 'Preferred time?', type: 'text' },
-    ],
-  },
   academics: {
     student: [
-      { id: 'collegeName', question: 'College name?', type: 'text' },
-      { id: 'rollNumber', question: 'Roll number', type: 'text' },
-      { id: 'emailId', question: 'Email ID', type: 'email' },
-      { id: 'department', question: 'Department', type: 'text' },
-      { id: 'hardSubject', question: 'Which subject is hard for you?', type: 'text' },
+      { id: 'classInfo', question: 'What is your Class/Year/Semester?', type: 'text' },
+      { id: 'subjects', question: 'List your subjects (comma-separated).', type: 'textarea' },
+      { id: 'hoursPerSubject', question: 'How many hours do you need per subject per week?', type: 'text' },
+      { id: 'studyTime', question: 'What is your preferred study time? (e.g., morning, afternoon, night)', type: 'text' },
+      { id: 'availability', question: 'What are your available days and time slots?', type: 'textarea' },
+      { id: 'breakPreferences', question: 'What are your break preferences? (e.g., 15 mins every hour)', type: 'text' },
+      { id: 'prioritySubjects', question: 'List your priority subjects (high/medium/low).', type: 'textarea' },
+      { id: 'deadlines', question: 'Any upcoming exams or deadlines?', type: 'text' },
+      { id: 'routines', question: 'Describe your other routines (sleep, meals, commute, gym, etc.).', type: 'textarea' },
     ],
-    professor: [
-      { id: 'collegeName', question: 'College name', type: 'text' },
-      { id: 'subjectHandled', question: 'What subject do you handle?', type: 'text' },
-      { id: 'emailId', question: 'Email ID', type: 'email' },
-      { id: 'availableDays', question: 'What days of the week are you available?', type: 'text' },
-      { id: 'preferredTimeSlots', question: 'Preferred time slots? (Morning / Afternoon)', type: 'text' },
-      { id: 'hoursPerWeek', question: 'How many hours per week do you need?', type: 'text' },
-      { id: 'specialLabHours', question: 'Do you need special lab hours?', type: 'text' },
-      { id: 'otherDepartmentClasses', question: 'Do you handle other department classes?', type: 'text' },
-      { id: 'regularDuties', question: 'Any regular duties? (NSS, NCC, Exam Cell, Counseling Hour)', type: 'text' },
-    ],
-    management: [
-      { id: 'collegeName', question: 'College name', type: 'text' },
-      { id: 'university', question: 'Under which university', type: 'text' },
-      { id: 'coursesOffered', question: 'Courses offered', type: 'text' },
-      { id: 'numberOfDepartments', question: 'Number of departments', type: 'text' },
-      { id: 'workingDays', question: 'Working days in semester', type: 'text' },
-      { id: 'sectionsPerDepartment', question: 'Sections per department', type: 'text' },
-      { id: 'staffAllocation', question: 'Staff allocation per department', type: 'text' },
-      { id: 'collegeTiming', question: 'College timing', type: 'text' },
-      { id: 'hoursPerDay', question: 'Hours per day', type: 'text' },
-      { id: 'periodDuration', question: 'Duration of each period', type: 'text' },
-      { id: 'breakLunchTime', question: 'Break + lunch time', type: 'text' },
-      { id: 'numberOfClassrooms', question: 'Number of classrooms', type: 'text' },
-      { id: 'studentsPerClassroom', question: 'Students per classroom', type: 'text' },
+    teacher: [
+      { id: 'subjects', question: 'What subjects do you teach? (comma-separated)', type: 'textarea' },
+      { id: 'weeklyClasses', question: 'Number of weekly classes per subject?', type: 'text' },
+      { id: 'classNames', question: 'What are the Class/Section names? (e.g., 10A, 10B)', type: 'text' },
+      { id: 'availability', question: 'What are your available days and time slots?', type: 'textarea' },
+      { id: 'teachingHours', question: 'What are your preferred teaching hours?', type: 'text' },
+      { id: 'restrictedHours', question: 'Any restricted hours? (meetings, duties, breaks)', type: 'text' },
+      { id: 'maxClassesPerDay', question: 'What is the maximum number of classes you can take per day?', type: 'number' },
+      { id: 'minGap', question: 'What is the minimum gap you need between classes?', type: 'text' },
+      { id: 'specialSessions', question: 'Any special sessions? (lab/practical/extra classes)', type: 'text' },
     ],
   },
 };
