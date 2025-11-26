@@ -48,13 +48,13 @@ export default function ExamsPage() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                             {upcomingExams.map((exam, index) => (
-                                <Card key={index} className="flex items-center p-4">
-                                    <div className={`w-2 h-16 rounded-full ${exam.color} mr-4`}></div>
+                                <Card key={index} className="flex flex-col sm:flex-row items-start sm:items-center p-4">
+                                    <div className={`w-full sm:w-2 h-2 sm:h-16 rounded-full ${exam.color} mr-0 sm:mr-4 mb-2 sm:mb-0`}></div>
                                     <div className="flex-grow">
                                         <p className="font-semibold">{exam.subject}</p>
                                         <p className="text-sm text-muted-foreground">{exam.date} at {exam.time} | Room: {exam.room}</p>
                                     </div>
-                                    <Button variant="ghost" size="sm">View Details <ChevronDown className="h-4 w-4 ml-1" /></Button>
+                                    <Button variant="ghost" size="sm" className="mt-2 sm:mt-0 self-end sm:self-center">View Details <ChevronDown className="h-4 w-4 ml-1" /></Button>
                                 </Card>
                             ))}
                         </CardContent>

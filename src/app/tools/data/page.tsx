@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"
@@ -14,7 +15,7 @@ export default function DataPage() {
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                 </Button>
-                <h2 className="text-3xl font-bold tracking-tight">Data Import / Export</h2>
+                <h2 className="text-xl sm:text-3xl font-bold tracking-tight">Data Import / Export</h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">

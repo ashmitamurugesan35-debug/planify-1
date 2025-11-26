@@ -88,14 +88,14 @@ export default function DailyTimetablePage() {
          <Button variant="ghost" size="icon" onClick={() => router.back()}>
            <ArrowLeft className="h-5 w-5" />
          </Button>
-         <h2 className="text-xl font-bold">
+         <h2 className="text-lg sm:text-xl font-bold text-center">
            {format(selectedDate, 'EEEE, MMMM d')}
          </h2>
          <div className="w-8"></div>
        </header>
 
       <ScrollArea className="flex-1">
-        <div className="relative p-4">
+        <div className="relative p-2 sm:p-4">
           {hours.map(hour => (
             <div key={hour} className="relative h-[60px] border-t border-dashed">
               <span className="absolute -top-3 left-0 text-xs text-muted-foreground">
@@ -107,44 +107,44 @@ export default function DailyTimetablePage() {
           {events?.map(event => (
              <Card 
                 key={event.eventId} 
-                className={cn('absolute w-[calc(100%-4rem)] left-12 p-2 rounded-lg shadow-md cursor-pointer transition-all hover:shadow-lg', eventColorMapping[event.type] || eventColorMapping.Custom)}
+                className={cn('absolute w-[calc(100%-3.5rem)] sm:w-[calc(100%-4rem)] left-10 sm:left-12 p-2 rounded-lg shadow-md cursor-pointer transition-all hover:shadow-lg', eventColorMapping[event.type] || eventColorMapping.Custom)}
                 style={getEventStyle(event)}
                 onClick={() => handleEventClick(event)}
              >
-                <p className="font-bold text-sm truncate">{event.title}</p>
-                <p className="text-xs truncate">{event.startTime} - {event.endTime}</p>
-                {event.description && <p className="text-xs truncate text-muted-foreground">{event.description}</p>}
+                <p className="font-bold text-xs sm:text-sm truncate">{event.title}</p>
+                <p className="text-[10px] sm:text-xs truncate">{event.startTime} - {event.endTime}</p>
+                {event.description && <p className="text-[10px] sm:text-xs truncate text-muted-foreground">{event.description}</p>}
              </Card>
           ))}
           
            {/* Example auto-scheduled block */}
           <Card 
-            className={cn('absolute w-[calc(100%-4rem)] left-12 p-2 rounded-lg shadow-md cursor-pointer transition-all hover:shadow-lg', eventColorMapping['Study Time'])}
+            className={cn('absolute w-[calc(100%-3.5rem)] sm:w-[calc(100%-4rem)] left-10 sm:left-12 p-2 rounded-lg shadow-md cursor-pointer transition-all hover:shadow-lg', eventColorMapping['Study Time'])}
             style={{top: `${14*60}px`, height: '50px'}}
           >
              <div className="flex justify-between items-center">
-                 <p className="font-bold text-sm truncate">Study Physics</p>
-                 <span className="text-xs font-semibold inline-flex items-center gap-1"><Bot size={12}/> Suggested</span>
+                 <p className="font-bold text-xs sm:text-sm truncate">Study Physics</p>
+                 <span className="text-[10px] sm:text-xs font-semibold inline-flex items-center gap-1"><Bot size={12}/> Suggested</span>
              </div>
-             <p className="text-xs truncate">2:00 PM - 2:50 PM</p>
+             <p className="text-[10px] sm:text-xs truncate">2:00 PM - 2:50 PM</p>
           </Card>
         </div>
       </ScrollArea>
       
       <footer className="p-2 border-t flex justify-around items-center sticky bottom-0 bg-background/95 z-10">
-        <Button variant="outline" size="sm"><Sparkles className="mr-2 h-4 w-4"/>Auto-Fill Free Time</Button>
+        <Button variant="outline" size="sm" className="text-xs px-2"><Sparkles className="mr-1 h-3 w-3"/>Auto-Fill</Button>
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
-            <Button size="sm" onClick={handleAddEvent}><Plus className="mr-2 h-4 w-4" /> Add Task/Event</Button>
+            <Button size="sm" onClick={handleAddEvent} className="text-xs px-2"><Plus className="mr-1 h-3 w-3" /> Add Task</Button>
           </SheetTrigger>
-          <SheetContent className="sm:max-w-lg">
+          <SheetContent className="w-full max-w-full sm:max-w-lg">
             <SheetHeader>
               <SheetTitle>{selectedEvent ? 'Edit Event' : 'Add New Event'}</SheetTitle>
             </SheetHeader>
             <EventForm event={selectedEvent} onSave={() => setIsSheetOpen(false)} selectedDate={selectedDate}/>
           </SheetContent>
         </Sheet>
-        <Button variant="secondary" size="sm"><Check className="mr-2 h-4 w-4"/>Confirm Schedule</Button>
+        <Button variant="secondary" size="sm" className="text-xs px-2"><Check className="mr-1 h-3 w-3"/>Confirm</Button>
       </footer>
     </div>
   );

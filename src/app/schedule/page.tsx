@@ -71,15 +71,15 @@ export default function SchedulePage() {
   return (
     <div className="flex flex-col h-screen bg-background">
       <header className="flex items-center justify-between p-4 border-b sticky top-0 bg-background/95 z-20">
-        <h1 className="text-xl font-bold font-headline">Your AI-Generated Timetable</h1>
+        <h1 className="text-md sm:text-xl font-bold font-headline">Your AI-Generated Timetable</h1>
         <div className="flex items-center gap-2">
-           <Button variant="outline" size="sm" onClick={() => router.push('/dashboard')}>Go to Dashboard</Button>
-           <Button size="sm"><Download className="mr-2 h-4 w-4" /> Save Schedule</Button>
+           <Button variant="outline" size="sm" onClick={() => router.push('/dashboard')}>Dashboard</Button>
+           <Button size="sm"><Download className="mr-2 h-4 w-4" /> Save</Button>
         </div>
       </header>
 
-      <main className="flex-1 overflow-auto p-4">
-        <div className="grid grid-cols-[auto_repeat(7,1fr)] gap-x-2">
+      <main className="flex-1 overflow-auto p-2 sm:p-4">
+        <div className="grid grid-cols-[auto_repeat(7,1fr)] gap-x-1 sm:gap-x-2 min-w-[800px]">
           {/* Time column */}
           <div className="grid grid-rows-[3rem_repeat(28,2rem)] text-right">
             <div/>
@@ -93,7 +93,7 @@ export default function SchedulePage() {
           {/* Day columns */}
           {daysOfWeek.map((day, dayIndex) => (
             <div key={day} className="relative grid grid-rows-[3rem_repeat(28,2rem)]">
-              <div className="text-center font-semibold sticky top-0 bg-background py-2">{day}</div>
+              <div className="text-center font-semibold sticky top-0 bg-background py-2 text-sm sm:text-base">{day}</div>
               
               {/* Grid lines */}
               {Array.from({ length: 14 * 2 + 1 }).map((_, i) => (
@@ -105,8 +105,8 @@ export default function SchedulePage() {
                  const [startHour, startMinute] = event.startTime.split(':').map(Number);
                  const [endHour, endMinute] = event.endTime.split(':').map(Number);
                  
-                 const start = (startHour - 7) * 120 + startMinute * 2; // Position in pixels
-                 const duration = ((endHour + endMinute/60) - (startHour + startMinute/60)) * 120;
+                 const start = (startHour - 7) * 48 + startMinute * 0.8;
+                 const duration = ((endHour + endMinute/60) - (startHour + startMinute/60)) * 48;
 
                 return (
                     <Card
@@ -116,13 +116,13 @@ export default function SchedulePage() {
                              eventColorMapping[event.type] || eventColorMapping.Custom
                         )}
                         style={{
-                            top: `${start + 60}px`, // 60px offset for header
+                            top: `${start + 48}px`, // 48px offset for header
                             height: `${duration}px`,
                         }}
                     >
                         <p className="font-bold truncate">{event.title}</p>
-                        <p className="truncate">{event.startTime} - {event.endTime}</p>
-                        {event.description && <p className="truncate text-muted-foreground">{event.description}</p>}
+                        <p className="truncate text-[10px]">{event.startTime} - {event.endTime}</p>
+                        {event.description && <p className="truncate text-muted-foreground text-[10px]">{event.description}</p>}
                     </Card>
                 )
               })}

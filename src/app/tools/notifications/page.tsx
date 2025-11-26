@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"
@@ -19,7 +20,7 @@ export default function NotificationsPage() {
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                 </Button>
-                <h2 className="text-3xl font-bold tracking-tight">Notification Settings</h2>
+                <h2 className="text-xl sm:text-3xl font-bold tracking-tight">Notification Settings</h2>
             </div>
 
 
@@ -64,9 +65,9 @@ export default function NotificationsPage() {
                 <CardContent className="space-y-6">
                     <div>
                         <Label className="font-semibold">Quiet Hours (Do Not Disturb)</Label>
-                        <div className="flex items-center space-x-2 mt-2">
+                        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 mt-2">
                             <Input type="time" defaultValue="22:00" />
-                            <span>to</span>
+                            <span className="hidden sm:inline">to</span>
                             <Input type="time" defaultValue="06:00" />
                         </div>
                     </div>
@@ -93,7 +94,7 @@ export default function NotificationsPage() {
 
 function NotificationToggle({ id, label, description, defaultChecked = false }: { id: string, label: string, description?: string, defaultChecked?: boolean }) {
     return (
-        <div className="flex items-center justify-between rounded-lg border p-4">
+        <div className="flex items-start sm:items-center justify-between rounded-lg border p-4 flex-col sm:flex-row gap-4">
             <Label htmlFor={id} className="flex flex-col space-y-1">
                 <span>{label}</span>
                 {description && <span className="font-normal leading-snug text-muted-foreground">{description}</span>}

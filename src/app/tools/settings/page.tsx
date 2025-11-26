@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"
@@ -19,7 +20,7 @@ export default function SettingsPage() {
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                 </Button>
-                <h2 className="text-3xl font-bold tracking-tight">Settings</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Settings</h2>
             </div>
            
 

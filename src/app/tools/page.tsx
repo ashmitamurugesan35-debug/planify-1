@@ -1,3 +1,4 @@
+
 "use client"
 
 import Link from "next/link";
@@ -48,7 +49,7 @@ export default function ToolsPage() {
         {tools.map((tool) => (
           <Link href={tool.href} key={tool.title}>
             <Card className="hover:bg-accent hover:border-primary/50 transition-all duration-300 shadow-md hover:shadow-xl h-full">
-              <CardHeader className="flex flex-row items-center gap-4 space-y-0">
+              <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center gap-4 space-y-2 sm:space-y-0">
                 <tool.icon className="h-8 w-8 text-primary" />
                 <div>
                   <CardTitle>{tool.title}</CardTitle>

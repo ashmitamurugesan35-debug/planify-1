@@ -92,12 +92,9 @@ export default function CalendarPage() {
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
-        <div className="flex items-center gap-4">
-            <h2 className="text-3xl font-bold tracking-tight">Calendar</h2>
-            <Button variant="outline" size="sm" onClick={() => setCurrentMonth(new Date())}>
-                Today
-            </Button>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Calendar</h2>
             <div className="flex items-center gap-1">
                 <Button
                     variant="ghost"
@@ -106,9 +103,9 @@ export default function CalendarPage() {
                 >
                     <ChevronLeft className="h-5 w-5" />
                 </Button>
-                <h3 className="text-xl font-semibold w-32 text-center">
-                    {format(currentMonth, 'MMMM yyyy')}
-                </h3>
+                <Button variant="outline" size="sm" onClick={() => setCurrentMonth(new Date())}>
+                    Today
+                </Button>
                 <Button
                     variant="ghost"
                     size="icon"
@@ -119,56 +116,63 @@ export default function CalendarPage() {
             </div>
         </div>
 
-        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-          <SheetTrigger asChild>
-            <Button onClick={handleAddEvent}>
-              <Plus className="mr-2 h-4 w-4" /> Add Event
-            </Button>
-          </SheetTrigger>
-          <SheetContent className="sm:max-w-lg">
-            <SheetHeader>
-              <SheetTitle>Add New Event</SheetTitle>
-            </SheetHeader>
-            <EventForm onSave={() => setIsSheetOpen(false)} />
-          </SheetContent>
-        </Sheet>
-      </div>
-
-      <div className="rounded-lg border shadow-sm">
-        <div className="grid grid-cols-7 text-center font-semibold text-sm text-muted-foreground border-b">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-            <div key={day} className="py-3">
-              {day}
-            </div>
-          ))}
+        <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+           <h3 className="text-lg sm:text-xl font-semibold w-full sm:w-40 text-center sm:text-right">
+                {format(currentMonth, 'MMMM yyyy')}
+            </h3>
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+              <SheetTrigger asChild>
+                <Button onClick={handleAddEvent} className="w-full sm:w-auto">
+                  <Plus className="mr-2 h-4 w-4" /> Add Event
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="sm:max-w-lg">
+                <SheetHeader>
+                  <SheetTitle>Add New Event</SheetTitle>
+                </SheetHeader>
+                <EventForm onSave={() => setIsSheetOpen(false)} />
+              </SheetContent>
+            </Sheet>
         </div>
-        <div className="grid grid-cols-7 h-[calc(100vh-220px)]">
-          {days.map((day) => (
-            <div
-              key={day.toString()}
-              onClick={() => handleDateClick(day)}
-              className={cn(
-                'border-r border-b p-2 flex flex-col items-center cursor-pointer transition-colors hover:bg-accent',
-                !isSameMonth(day, currentMonth) && 'text-muted-foreground',
-                isDayToday(day) && 'bg-blue-500/10'
-              )}
-            >
-              <span
+      </div>
+      
+      <div className="overflow-x-auto">
+        <div className="rounded-lg border shadow-sm min-w-[600px]">
+          <div className="grid grid-cols-7 text-center font-semibold text-sm text-muted-foreground border-b">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+              <div key={day} className="py-3">
+                {day}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 h-[calc(100vh-250px)]">
+            {days.map((day) => (
+              <div
+                key={day.toString()}
+                onClick={() => handleDateClick(day)}
                 className={cn(
-                  'h-8 w-8 flex items-center justify-center rounded-full font-medium',
-                  isDayToday(day) && 'bg-primary text-primary-foreground'
+                  'border-r border-b p-2 flex flex-col items-center cursor-pointer transition-colors hover:bg-accent',
+                  !isSameMonth(day, currentMonth) && 'text-muted-foreground',
+                  isDayToday(day) && 'bg-blue-500/10'
                 )}
               >
-                {format(day, 'd')}
-              </span>
-              <div className="mt-2 flex-grow w-full flex justify-center">
-                 {loading && <Skeleton className="h-2 w-2 rounded-full mt-1" />}
-                 {hasEvents(day) && (
-                    <div className="h-2 w-2 rounded-full bg-red-500 mt-1"></div>
-                 )}
+                <span
+                  className={cn(
+                    'h-8 w-8 flex items-center justify-center rounded-full font-medium',
+                    isDayToday(day) && 'bg-primary text-primary-foreground'
+                  )}
+                >
+                  {format(day, 'd')}
+                </span>
+                <div className="mt-2 flex-grow w-full flex justify-center">
+                   {loading && <Skeleton className="h-2 w-2 rounded-full mt-1" />}
+                   {hasEvents(day) && (
+                      <div className="h-2 w-2 rounded-full bg-red-500 mt-1"></div>
+                   )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

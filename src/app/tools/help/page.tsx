@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Input } from "@/components/ui/input";
@@ -36,7 +37,7 @@ export default function HelpCenterPage() {
               </Link>
           </Button>
           <div className="text-left">
-              <h2 className="text-3xl font-bold tracking-tight">Help Center</h2>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Help Center</h2>
               <p className="text-muted-foreground mt-1">How can we help you today?</p>
           </div>
        </div>
@@ -46,7 +47,7 @@ export default function HelpCenterPage() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-3">
             <CardHeader>
                 <CardTitle className="flex items-center gap-2"><FileQuestion className="h-6 w-6 text-primary"/> Frequently Asked Questions</CardTitle>
             </CardHeader>
@@ -62,7 +63,7 @@ export default function HelpCenterPage() {
             </CardContent>
         </Card>
         
-        <div className="space-y-6">
+        <div className="space-y-6 lg:col-span-3 grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Video className="h-6 w-6 text-primary"/> Tutorials</CardTitle>
