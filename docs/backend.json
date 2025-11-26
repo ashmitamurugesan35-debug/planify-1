@@ -113,7 +113,7 @@
         }
     },
     "auth": {
-        "providers": ["Google", "GitHub", "Email/Password"]
+        "providers": ["Google", "Email/Password"]
     },
     "firestore": {
         "/users/{userId}": {
