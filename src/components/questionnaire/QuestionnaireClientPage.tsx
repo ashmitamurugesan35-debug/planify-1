@@ -94,10 +94,10 @@ export function QuestionnaireClientPage({
         
         toast({
           title: 'Schedule Generated!',
-          description: 'Redirecting you to your new schedule.',
+          description: 'Redirecting you to your new dashboard.',
         });
         sessionStorage.setItem('scheduleData', JSON.stringify(result.data));
-        router.push('/schedule');
+        router.push('/dashboard');
       } else {
         toast({
           variant: 'destructive',
