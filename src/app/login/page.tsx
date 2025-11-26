@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -85,7 +86,6 @@ export default function LoginPage() {
                 router.push('/dashboard');
             }
         } catch (error: any) {
-            console.error(error);
             toast({
                 variant: 'destructive',
                 title: 'Sign In Failed',
@@ -185,7 +185,6 @@ function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
             toast({ title: 'Login Successful', description: 'Redirecting...' });
             router.push('/dashboard');
         } catch (error: any) {
-            console.error(error);
             let description = 'An unknown error occurred.';
             if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                 description = 'Invalid credentials. Please check your email and password.';
@@ -275,7 +274,6 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
             toast({ title: 'Sign Up Successful', description: 'Redirecting to next step...' });
             router.push('/category');
         } catch (error: any) {
-             console.error(error);
             let description = 'An unknown error occurred.';
             if (error.code === 'auth/email-already-in-use') {
                 description = 'This email is already in use. Please sign in or use a different email.';
@@ -356,7 +354,3 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
         </Form>
     );
 }
-
-    
-
-    
