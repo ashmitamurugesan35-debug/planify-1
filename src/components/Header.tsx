@@ -19,10 +19,7 @@ export function Header() {
   const { user, status } = useUser();
   const firestore = useFirestore();
 
-  const userDocRef = React.useMemo(() => {
-    if (!user || !firestore) return null;
-    return doc(firestore, 'users', user.uid);
-  }, [user, firestore]);
+  const userDocRef = user && firestore ? doc(firestore, 'users', user.uid) : null;
 
   const { data: userProfile } = useDoc<any>(userDocRef);
 
