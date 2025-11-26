@@ -22,6 +22,10 @@
                     "type": "string",
                     "format": "uri",
                     "description": "URL of the user's profile picture."
+                },
+                "answers": {
+                    "type": "object",
+                    "description": "The user's answers to the questionnaire."
                 }
             },
             "required": ["uid", "email"]

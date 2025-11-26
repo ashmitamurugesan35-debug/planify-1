@@ -18,6 +18,9 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import type { Question } from '@/lib/questions';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useUser } from '@/firebase/auth/use-user';
+import { useFirestore } from '@/firebase/provider';
+import { doc, setDoc } from 'firebase/firestore';
 
 type QuestionnaireClientPageProps = {
   category: string;
@@ -35,6 +38,8 @@ export function QuestionnaireClientPage({
   totalQuestions,
 }: QuestionnaireClientPageProps) {
   const router = useRouter();
+  const { user } = useUser();
+  const firestore = useFirestore();
   const { answers, updateAnswer, getFormattedAnswers } = useQuestionnaire();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -68,9 +73,14 @@ export function QuestionnaireClientPage({
       const finalAnswers = { ...formattedAnswers, ...data };
       
       const result = await createSchedule(finalAnswers);
-      setIsLoading(false);
-      
+
       if (result.success && result.data) {
+        if (user && firestore) {
+          // Save answers to user's profile
+          const userRef = doc(firestore, 'users', user.uid);
+          await setDoc(userRef, { answers: { ...answers, ...data } }, { merge: true });
+        }
+        
         toast({
           title: 'Schedule Generated!',
           description: 'Redirecting you to your new schedule.',
@@ -84,6 +94,8 @@ export function QuestionnaireClientPage({
           description: result.error || 'Could not generate the schedule. Please try again.',
         });
       }
+      setIsLoading(false);
+
     } else {
       router.push(`/q/${category}/${subCategory}/${questionIndex + 1}`);
     }

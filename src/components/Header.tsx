@@ -9,15 +9,22 @@ import { SidebarTrigger } from './ui/sidebar';
 import { useUser } from '@/firebase/auth/use-user';
 import { Skeleton } from './ui/skeleton';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { useFirestore } from '@/firebase/provider';
+import { useDoc } from '@/firebase/firestore/use-doc';
+import { doc } from 'firebase/firestore';
 
 export function Header() {
   const router = useRouter();
-  const [isClient, setIsClient] = React.useState(false);
   const { user, status } = useUser();
+  const firestore = useFirestore();
 
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const userDocRef = React.useMemo(() => {
+    if (!user || !firestore) return null;
+    return doc(firestore, 'users', user.uid);
+  }, [user, firestore]);
+
+  const { data: userProfile } = useDoc<any>(userDocRef);
 
   const getInitials = (name: string | null | undefined) => {
     if (!name) return 'U';
@@ -40,17 +47,43 @@ export function Header() {
       
       <div className="flex items-center gap-3">
         {status === 'loading' ? (
-           <Skeleton className="h-6 w-32" />
+           <Skeleton className="h-8 w-32" />
         ) : user ? (
-            <>
-                <div className="text-right hidden sm:block">
-                    <p className="text-sm font-medium leading-none">{user.displayName || 'Welcome'}</p>
+            <Popover>
+              <PopoverTrigger asChild>
+                <div className="flex items-center gap-3 cursor-pointer">
+                  <div className="text-right hidden sm:block">
+                      <p className="text-sm font-medium leading-none">{user.displayName || 'Welcome'}</p>
+                  </div>
+                  <Avatar>
+                      {user.photoURL ? <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} /> : null}
+                      <AvatarFallback>{getInitials(user.displayName)}</AvatarFallback>
+                  </Avatar>
                 </div>
-                 <Avatar>
-                    {user.photoURL ? <AvatarImage src={user.photoURL} alt={user.displayName || 'User'} /> : null}
-                    <AvatarFallback>{getInitials(user.displayName)}</AvatarFallback>
-                </Avatar>
-            </>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Your Onboarding Answers</h4>
+                    <p className="text-sm text-muted-foreground">
+                      This is the information you provided to generate your schedule.
+                    </p>
+                  </div>
+                  <div className="grid gap-2 text-sm">
+                    {userProfile && userProfile.answers ? (
+                      Object.entries(userProfile.answers).map(([key, value]) => (
+                        <div key={key} className="grid grid-cols-3 items-center gap-2">
+                          <span className="font-semibold capitalize col-span-1">{key.replace(/([A-Z])/g, ' $1')}:</span>
+                          <span className="text-muted-foreground col-span-2">{value as string}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-muted-foreground">No answers found.</p>
+                    )}
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
         ) : null}
       </div>
     </header>

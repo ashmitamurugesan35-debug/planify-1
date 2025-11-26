@@ -6,6 +6,15 @@ import { useAuth } from '../provider';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useFirestore } from '../provider';
 
+type UserProfile = {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+  lastLogin: any;
+  answers?: { [key: string]: string };
+}
+
 export function useUser() {
   const auth = useAuth();
   const firestore = useFirestore();
@@ -27,13 +36,14 @@ export function useUser() {
         if (firestore) {
           const userRef = doc(firestore, 'users', firebaseUser.uid);
           try {
-            await setDoc(userRef, {
+            const userData: Partial<UserProfile> = {
               uid: firebaseUser.uid,
               email: firebaseUser.email,
               displayName: firebaseUser.displayName,
               photoURL: firebaseUser.photoURL,
               lastLogin: serverTimestamp(),
-            }, { merge: true });
+            };
+            await setDoc(userRef, userData, { merge: true });
           } catch(e) {
             console.error('Error saving user to firestore', e);
           }
