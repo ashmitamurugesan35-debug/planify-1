@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -24,7 +23,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
-import { Loader2, ArrowLeft } from 'lucide-react';
+import { Loader2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { useAuth } from '@/firebase/provider';
@@ -172,6 +171,7 @@ function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
     const router = useRouter();
     const { toast } = useToast();
     const auth = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
     const form = useForm<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
         defaultValues: { email: '', password: '' },
@@ -222,9 +222,23 @@ function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel className="text-white/80">Password</FormLabel>
-                            <FormControl>
-                                <Input type="password" placeholder="••••••••" {...field} className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-white"/>
-                            </FormControl>
+                            <div className="relative">
+                                <FormControl>
+                                    <Input 
+                                        type={showPassword ? 'text' : 'password'} 
+                                        placeholder="••••••••" 
+                                        {...field} 
+                                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-white pr-10"
+                                    />
+                                </FormControl>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute inset-y-0 right-0 flex items-center pr-3"
+                                >
+                                    {showPassword ? <EyeOff className="h-5 w-5 text-white/70" /> : <Eye className="h-5 w-5 text-white/70" />}
+                                </button>
+                            </div>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -242,6 +256,7 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
     const router = useRouter();
     const { toast } = useToast();
     const auth = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
     const form = useForm<z.infer<typeof signUpSchema>>({
         resolver: zodResolver(signUpSchema),
         defaultValues: { displayName: '', email: '', password: '' },
@@ -312,9 +327,23 @@ function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel className="text-white/80">Password</FormLabel>
-                            <FormControl>
-                                <Input type="password" placeholder="••••••••" {...field} className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-white"/>
-                            </FormControl>
+                             <div className="relative">
+                                <FormControl>
+                                    <Input 
+                                        type={showPassword ? 'text' : 'password'} 
+                                        placeholder="••••••••" 
+                                        {...field} 
+                                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-white pr-10"
+                                    />
+                                </FormControl>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute inset-y-0 right-0 flex items-center pr-3"
+                                >
+                                    {showPassword ? <EyeOff className="h-5 w-5 text-white/70" /> : <Eye className="h-5 w-5 text-white/70" />}
+                                </button>
+                            </div>
                             <FormMessage />
                         </FormItem>
                     )}
