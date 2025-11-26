@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -16,7 +17,6 @@ import { errorEmitter } from '../error-emitter';
 import { FirestorePermissionError } from '../errors';
 
 interface UseCollectionOptions<T> {
-  query?: (ref: ReturnType<typeof collection>) => Query;
   initialData?: T[];
 }
 
@@ -33,10 +33,10 @@ export function useCollection<T>(
     if (!pathOrQuery || !firestore) return null;
     if (typeof pathOrQuery === 'string') {
         const ref = collection(firestore, pathOrQuery);
-        return options?.query ? options.query(ref) : ref;
+        return ref; // Keep it simple, specific queries should be memoized in the component
     }
     return pathOrQuery;
-  }, [pathOrQuery, firestore, options?.query]);
+  }, [pathOrQuery, firestore]);
 
   useEffect(() => {
     if (!memoizedQuery) {
@@ -52,12 +52,18 @@ export function useCollection<T>(
       (snapshot: QuerySnapshot<DocumentData>) => {
         const result: T[] = [];
         snapshot.forEach((doc) => {
-          // Use doc.id for eventId if eventId field doesn't exist
           const docData = doc.data();
           const docId = docData.eventId || doc.id;
           result.push({ ...docData, eventId: docId } as T);
         });
-        setData(result);
+        
+        setData(prevData => {
+            if (JSON.stringify(prevData) === JSON.stringify(result)) {
+              return prevData;
+            }
+            return result;
+        });
+
         setLoading(false);
         setError(null);
       },

@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -48,8 +49,14 @@ export function useDoc<T>(
       (snapshot: DocumentSnapshot<DocumentData>) => {
         if (snapshot.exists()) {
           const docData = snapshot.data();
-          const docId = 'id' in docData ? docData.id : snapshot.id;
-          setData({ ...docData, id: docId } as T);
+          // Ensure we don't cause a re-render if the data is the same
+          setData(prevData => {
+            const newData = { ...docData, id: snapshot.id } as T;
+            if (JSON.stringify(prevData) === JSON.stringify(newData)) {
+              return prevData;
+            }
+            return newData;
+          });
         } else {
           setData(null);
         }
