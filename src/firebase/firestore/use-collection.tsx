@@ -36,7 +36,7 @@ export function useCollection<T>(
         return options?.query ? options.query(ref) : ref;
     }
     return pathOrQuery;
-  }, [pathOrQuery, firestore, options]);
+  }, [pathOrQuery, firestore, options?.query]);
 
   useEffect(() => {
     if (!memoizedQuery) {
@@ -54,7 +54,8 @@ export function useCollection<T>(
         snapshot.forEach((doc) => {
           // Use doc.id for eventId if eventId field doesn't exist
           const docData = doc.data();
-          result.push({ ...docData, eventId: docData.eventId || doc.id } as T);
+          const docId = docData.eventId || doc.id;
+          result.push({ ...docData, eventId: docId } as T);
         });
         setData(result);
         setLoading(false);

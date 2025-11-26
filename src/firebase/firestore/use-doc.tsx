@@ -47,7 +47,9 @@ export function useDoc<T>(
       memoizedRef,
       (snapshot: DocumentSnapshot<DocumentData>) => {
         if (snapshot.exists()) {
-          setData({ id: snapshot.id, ...snapshot.data() } as T);
+          const docData = snapshot.data();
+          const docId = 'id' in docData ? docData.id : snapshot.id;
+          setData({ ...docData, id: docId } as T);
         } else {
           setData(null);
         }
