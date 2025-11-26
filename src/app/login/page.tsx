@@ -7,6 +7,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import * as React from 'react';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+  getAuth,
+} from 'firebase/auth';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,6 +27,7 @@ import Image from 'next/image';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
+import { useAuth } from '@/firebase/provider';
 
 const GoogleIcon = () => (
     <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
@@ -55,6 +64,7 @@ export default function LoginPage() {
     const { toast } = useToast();
     const [isLoading, setIsLoading] = useState(false);
     const [isClient, setIsClient] = useState(false);
+    const auth = useAuth();
     
     useEffect(() => {
         setIsClient(true);
@@ -63,12 +73,23 @@ export default function LoginPage() {
     const backgroundImage = PlaceHolderImages.find(p => p.id === 'login-background');
 
     const handleGoogleSignIn = async () => {
+        if (!auth) return;
         setIsLoading(true);
-        // Simulate a network request
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        toast({ title: 'Login Successful', description: 'Redirecting...' });
-        router.push('/category');
-        setIsLoading(false);
+        const provider = new GoogleAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+            toast({ title: 'Login Successful', description: 'Redirecting...' });
+            router.push('/category');
+        } catch (error: any) {
+            console.error(error);
+            toast({
+                variant: 'destructive',
+                title: 'Sign In Failed',
+                description: error.message || 'An unknown error occurred.',
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -145,17 +166,33 @@ export default function LoginPage() {
 function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) => void, isLoading: boolean }) {
     const router = useRouter();
     const { toast } = useToast();
+    const auth = useAuth();
     const form = useForm<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
         defaultValues: { email: '', password: '' },
     });
 
     const handleEmailSubmit = async (data: z.infer<typeof signInSchema>) => {
+        if (!auth) return;
         setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        toast({ title: 'Login Successful', description: 'Redirecting...' });
-        router.push('/category');
-        setIsLoading(false);
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password);
+            toast({ title: 'Login Successful', description: 'Redirecting...' });
+            router.push('/category');
+        } catch (error: any) {
+            console.error(error);
+            let description = 'An unknown error occurred.';
+            if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                description = 'Invalid credentials. Please check your email and password.';
+            }
+            toast({
+                variant: 'destructive',
+                title: 'Sign In Failed',
+                description,
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -199,21 +236,40 @@ function SignInForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) =>
 function SignUpForm({ setIsLoading, isLoading }: { setIsLoading: (v: boolean) => void, isLoading: boolean }) {
     const router = useRouter();
     const { toast } = useToast();
+    const auth = useAuth();
     const form = useForm<z.infer<typeof signUpSchema>>({
         resolver: zodResolver(signUpSchema),
         defaultValues: { displayName: '', email: '', password: '' },
     });
 
     const handleEmailSubmit = async (data: z.infer<typeof signUpSchema>) => {
+        if (!auth) return;
         setIsLoading(true);
-        
-        console.log('User signed up with data:', data);
-
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        toast({ title: 'Sign Up Successful', description: 'Redirecting to next step...' });
-        router.push('/category');
-        setIsLoading(false);
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            if (userCredential.user) {
+                await updateProfile(userCredential.user, {
+                    displayName: data.displayName,
+                });
+            }
+            toast({ title: 'Sign Up Successful', description: 'Redirecting to next step...' });
+            router.push('/category');
+        } catch (error: any) {
+             console.error(error);
+            let description = 'An unknown error occurred.';
+            if (error.code === 'auth/email-already-in-use') {
+                description = 'This email is already in use. Please sign in or use a different email.';
+            } else if (error.code === 'auth/weak-password') {
+                description = 'The password is too weak. Please use a stronger password.';
+            }
+            toast({
+                variant: 'destructive',
+                title: 'Sign Up Failed',
+                description,
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
