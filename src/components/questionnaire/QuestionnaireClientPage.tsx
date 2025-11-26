@@ -21,6 +21,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useUser } from '@/firebase/auth/use-user';
 import { useFirestore } from '@/firebase/provider';
 import { doc, setDoc } from 'firebase/firestore';
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 type QuestionnaireClientPageProps = {
   category: string;
@@ -78,7 +80,15 @@ export function QuestionnaireClientPage({
         if (user && firestore) {
           // Save answers to user's profile
           const userRef = doc(firestore, 'users', user.uid);
-          await setDoc(userRef, { answers: { ...answers, ...data } }, { merge: true });
+          const payload = { answers: { ...answers, ...data } };
+          setDoc(userRef, payload, { merge: true }).catch(async (serverError) => {
+            const permissionError = new FirestorePermissionError({
+              path: userRef.path,
+              operation: 'update',
+              requestResourceData: payload,
+            });
+            errorEmitter.emit('permission-error', permissionError);
+          });
         }
         
         toast({

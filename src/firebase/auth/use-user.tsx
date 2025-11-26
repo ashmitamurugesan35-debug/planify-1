@@ -1,3 +1,4 @@
+
 'use client';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
@@ -5,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../provider';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useFirestore } from '../provider';
+import { errorEmitter } from '../error-emitter';
+import { FirestorePermissionError } from '../errors';
 
 type UserProfile = {
   uid: string;
@@ -35,18 +38,21 @@ export function useUser() {
         // Save user to firestore
         if (firestore) {
           const userRef = doc(firestore, 'users', firebaseUser.uid);
-          try {
-            const userData: Partial<UserProfile> = {
-              uid: firebaseUser.uid,
-              email: firebaseUser.email,
-              displayName: firebaseUser.displayName,
-              photoURL: firebaseUser.photoURL,
-              lastLogin: serverTimestamp(),
-            };
-            await setDoc(userRef, userData, { merge: true });
-          } catch(e) {
-            console.error('Error saving user to firestore', e);
-          }
+          const userData: Partial<UserProfile> = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName,
+            photoURL: firebaseUser.photoURL,
+            lastLogin: serverTimestamp(),
+          };
+          setDoc(userRef, userData, { merge: true }).catch(async (serverError) => {
+            const permissionError = new FirestorePermissionError({
+              path: userRef.path,
+              operation: 'update',
+              requestResourceData: userData,
+            });
+            errorEmitter.emit('permission-error', permissionError);
+          });
         }
       } else {
         setUser(null);
